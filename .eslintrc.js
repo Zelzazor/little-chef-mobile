@@ -24,7 +24,8 @@ module.exports = {
   'plugins': [
     'react', 
     'react-hooks',
-    '@typescript-eslint'
+    '@typescript-eslint', 
+    'prettier',
   ],
   'rules': {
     'indent': [
@@ -47,6 +48,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
+    'prettier/prettier': 'error',
   },
   settings: {
     react: {
