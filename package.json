@@ -4,6 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "start:ngrok": "expo start --tunnel",
     "lint": "eslint --ext .tsx --ext .ts src/",
     "format": "prettier --check ./src",
     "android": "expo start --android",
