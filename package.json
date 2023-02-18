@@ -28,7 +28,9 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "react-native-dotenv": "^3.4.7",
+    "@expo/ngrok": "^4.1.0"
   },
   "private": true
 }
