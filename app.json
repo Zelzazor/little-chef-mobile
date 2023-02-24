@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "react-native-expo-setup-learning",
-    "slug": "react-native-expo-setup-learning",
-    "owner": "rukshu",
+    "name": "little-chef",
+    "slug": "little-chef",
+    "owner": "little-chef",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,10 +25,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.littlechef.littlechef"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "74bc52f1-2e0f-4ff3-9f5c-51ede8e27cf4"
+      }
     }
   }
 }
