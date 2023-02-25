@@ -30,6 +30,9 @@
     "@typescript-eslint/no-empty-function": "off",
     "react/display-name": "off",
     "react/prop-types": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "prettier/prettier": "error"
   },
