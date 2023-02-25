@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --dev-client",
-    "start:ngrok": "expo start --tunnel",
+    "start:ngrok": "expo start --dev-client --tunnel",
     "lint": "eslint --ext .tsx --ext .ts src/",
     "format": "prettier --check ./src",
     "android": "expo run:android",
