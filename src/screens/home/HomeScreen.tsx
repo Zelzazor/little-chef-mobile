@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../features/auth';
 
 export const HomeScreen = () => {
   const { isLoading, loggedIn, onLogin, onLogout, user } = useAuth();
