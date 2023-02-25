@@ -1,21 +1,16 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { NavigationStack } from './src/features/navigation';
+import { Auth0Provider } from 'react-native-auth0';
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '@env';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your application!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}>
+      <NavigationContainer>
+        <NavigationStack />
+      </NavigationContainer>
+    </Auth0Provider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
