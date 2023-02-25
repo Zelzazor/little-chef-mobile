@@ -4,6 +4,7 @@
   "scripts": {
     "start": "expo start --dev-client",
     "start:ngrok": "expo start --dev-client --tunnel",
+    "build": "eas build --profile development --platform android",
     "lint": "eslint --ext .tsx --ext .ts src/",
     "format": "prettier --check ./src",
     "android": "expo run:android",
