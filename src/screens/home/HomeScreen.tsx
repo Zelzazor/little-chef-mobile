@@ -1,31 +1,26 @@
-import { View, Button, Text, StyleSheet } from 'react-native';
-import { useAuth0 } from 'react-native-auth0';
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
+import { useAuth } from '../../hooks/useAuth';
 
 export const HomeScreen = () => {
-  const { authorize, clearSession, user } = useAuth0();
+  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuth();
 
-  const onLogin = async () => {
-    try {
-      console.log('tiro login');
-      await authorize({ scope: 'openid profile email' });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const onLogout = async () => {
-    try {
-      await clearSession();
-    } catch (e) {
-      console.log('Log out cancelled');
-    }
-  };
-
-  const loggedIn = user !== undefined && user !== null;
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      {loggedIn && <Text>You are logged in as {user.name}</Text>}
+      {loggedIn && <Text>You are logged in as {user?.name}</Text>}
       {!loggedIn && <Text>You are not logged in</Text>}
 
       <Button
