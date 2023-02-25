@@ -1,6 +1,6 @@
 {
-  "name": "react-native-expo-setup-learning",
-  "version": "1.0.0",
+  "name": "little-chef",
+  "version": "0.1.0",
   "scripts": {
     "start": "expo start --dev-client",
     "start:ngrok": "expo start --dev-client --tunnel",
