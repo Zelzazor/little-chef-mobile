@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "jsx": "react", 
-    "esModuleInterop": true
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "baseUrl": ".",
 },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
 }
