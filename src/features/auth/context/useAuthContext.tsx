@@ -44,6 +44,8 @@ const AuthContextWrapper = ({ children }) => {
           setCredentials(creds);
         })
         .catch(console.error);
+    } else {
+      setCredentials(null);
     }
   }, [loggedIn, getCredentials]);
 
