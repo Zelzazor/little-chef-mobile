@@ -6,14 +6,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../features/auth';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 export const ProfileScreen = () => {
-  const { isLoading, loggedIn, onLogin, onLogout, user, credentials } =
-    useAuth();
+  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuthContext();
 
   if (isLoading) {
     return (
@@ -31,8 +30,6 @@ export const ProfileScreen = () => {
       </View>
     );
   }
-
-  console.log(credentials);
 
   return (
     <View style={styles.container}>

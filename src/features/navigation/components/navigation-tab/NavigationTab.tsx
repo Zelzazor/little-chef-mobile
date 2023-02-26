@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IonIcons from '@expo/vector-icons/Ionicons';
-import { useAuth } from '../../../../hooks/useAuth';
 import { LoginScreen, ProfileScreen, SearchScreen } from '../../../../screens';
+import { useAuthContext } from '../../../auth';
 
 type TabParamList = {
   Profile: undefined;
@@ -12,7 +12,7 @@ type TabParamList = {
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export const NavigationTab = () => {
-  const { loggedIn } = useAuth();
+  const { loggedIn } = useAuthContext();
 
   return (
     <Tab.Navigator
