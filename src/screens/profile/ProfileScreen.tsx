@@ -7,12 +7,14 @@ import {
 } from 'react-native';
 import { Image } from 'expo-image';
 import { useAuthContext } from '../../features/auth';
+import { useUserContext } from '../../features/user/context/useUserContext';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 export const ProfileScreen = () => {
-  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuthContext();
+  const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
+  const { user } = useUserContext();
 
   if (isLoading) {
     return (

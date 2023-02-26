@@ -8,7 +8,8 @@ import {
 import { useAuthContext } from '../../features/auth';
 
 export const LoginScreen = () => {
-  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuthContext();
+  const { isLoading, loggedIn, onLogin, onLogout, auth0User } =
+    useAuthContext();
 
   if (isLoading) {
     return (
@@ -20,7 +21,7 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      {loggedIn && <Text>You are logged in as {user?.name}</Text>}
+      {loggedIn && <Text>You are logged in as {auth0User?.name}</Text>}
       {!loggedIn && <Text style={styles.text}>You are not logged in</Text>}
       <Button
         color="#CA3433"
