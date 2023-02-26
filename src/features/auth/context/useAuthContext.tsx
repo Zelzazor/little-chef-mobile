@@ -1,4 +1,4 @@
-import { AUTH0_DOMAIN, AUTH0_CLIENT_ID } from '@env';
+import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_AUDIENCE } from '@env';
 import {
   createContext,
   useCallback,
@@ -35,7 +35,7 @@ const AuthContextWrapper = ({ children }) => {
 
   useEffect(() => {
     if (loggedIn) {
-      getCredentials()
+      getCredentials('openid profile email', 0)
         .then((creds) => {
           setCredentials(creds);
         })
@@ -45,7 +45,7 @@ const AuthContextWrapper = ({ children }) => {
 
   const onLogin = useCallback(() => {
     setIsLoading(true);
-    authorize({ scope: 'openid profile email' })
+    authorize({ scope: 'openid profile email', audience: AUTH0_AUDIENCE })
       .then(() => setIsLoading(false))
       .catch(console.error);
   }, [authorize]);

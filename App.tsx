@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { NavigationStack } from './src/features/navigation';
+import { NavigationTab } from './src/features/navigation';
 import { AuthProvider } from './src/features/auth';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -10,7 +10,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <NavigationContainer>
-          <NavigationStack />
+          <NavigationTab />
         </NavigationContainer>
       </AuthProvider>
     </QueryClientProvider>
