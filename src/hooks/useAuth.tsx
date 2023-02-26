@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from 'react-native-auth0';
+import { AUTH0_AUDIENCE } from '@env';
 
 export const useAuth = () => {
   const { authorize, clearSession, user, getCredentials } = useAuth0();
@@ -9,7 +10,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      getCredentials()
+      getCredentials('openid profile email', 0)
         .then((creds) => {
           setCredentials(creds);
         })
@@ -19,7 +20,10 @@ export const useAuth = () => {
 
   const onLogin = () => {
     setIsLoading(true);
-    authorize({ scope: 'openid profile email' })
+    authorize({
+      scope: 'openid profile email',
+      audience: AUTH0_AUDIENCE,
+    })
       .then(() => setIsLoading(false))
       .catch(console.error);
   };
