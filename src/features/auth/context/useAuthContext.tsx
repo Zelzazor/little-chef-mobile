@@ -7,19 +7,15 @@ import {
   useMemo,
   useState,
 } from 'react';
-import {
-  Auth0User,
-  useAuth0,
-  Credentials,
-  Auth0Provider,
-} from 'react-native-auth0';
+import { useAuth0, Credentials, Auth0Provider } from 'react-native-auth0';
+import { User, useUser } from '../../user';
 
 interface AuthContextProps {
   isLoading: boolean;
   loggedIn: boolean;
   onLogin: () => void;
   onLogout: () => void;
-  user: Auth0User<null>;
+  user: User;
   credentials: Credentials;
 }
 
@@ -28,10 +24,18 @@ export const AuthContext = createContext<AuthContextProps>(
 );
 
 const AuthContextWrapper = ({ children }) => {
-  const { authorize, clearSession, user, getCredentials } = useAuth0();
+  const {
+    authorize,
+    clearSession,
+    user: auth0User,
+    getCredentials,
+  } = useAuth0();
+  const { useGetUser } = useUser();
+  const { data: registeredUser, refetch: refetchUser } = useGetUser();
+
   const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState(null);
-  const loggedIn = user !== undefined && user !== null;
+  const loggedIn = auth0User !== undefined && auth0User !== null;
 
   useEffect(() => {
     if (loggedIn) {
@@ -46,9 +50,13 @@ const AuthContextWrapper = ({ children }) => {
   const onLogin = useCallback(() => {
     setIsLoading(true);
     authorize({ scope: 'openid profile email', audience: AUTH0_AUDIENCE })
-      .then(() => setIsLoading(false))
+      .then(() =>
+        refetchUser().then(() => {
+          setIsLoading(false);
+        }),
+      )
       .catch(console.error);
-  }, [authorize]);
+  }, [authorize, refetchUser]);
 
   const onLogout = useCallback(() => {
     try {
@@ -60,6 +68,10 @@ const AuthContextWrapper = ({ children }) => {
       console.log('Log out cancelled');
     }
   }, [clearSession]);
+
+  const user: User = useMemo(() => {
+    return { ...auth0User, ...registeredUser.data } as User;
+  }, [auth0User, registeredUser]);
 
   const payload: AuthContextProps = useMemo(() => {
     return { isLoading, loggedIn, onLogin, onLogout, user, credentials };
