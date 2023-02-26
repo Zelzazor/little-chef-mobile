@@ -7,9 +7,13 @@ export const useUser = () => {
   const URL = '/user';
 
   const useGetUser = () =>
-    useQuery('user', async () => {
-      return axios.get<GetUserResponse>(URL);
-    });
+    useQuery(
+      'user',
+      async () => {
+        return axios.get<GetUserResponse>(URL);
+      },
+      { enabled: false },
+    );
 
   const useTest = () =>
     useQuery('test', async () => {
