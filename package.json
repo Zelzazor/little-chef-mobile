@@ -2,8 +2,8 @@
   "name": "little-chef",
   "version": "0.1.0",
   "scripts": {
-    "start": "expo start --dev-client",
-    "start:ngrok": "expo start --dev-client --tunnel",
+    "start": "expo start --dev-client -c",
+    "start:ngrok": "expo start --dev-client --tunnel -c",
     "build:dev": "npx expo prebuild --clean && eas build --profile development --platform android",
     "build:preview": "npx expo prebuild --clean && eas build --profile preview --platform android",
     "build": "npx expo prebuild --clean && eas build --platform android",
