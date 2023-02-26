@@ -1,1 +1,3 @@
-export type GetUserResponse = any;
+import { RegisteredUser } from './user';
+
+export type GetUserResponse = RegisteredUser;
