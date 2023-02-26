@@ -5,10 +5,10 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import { useAuth } from '../../features/auth';
+import { useAuthContext } from '../../features/auth';
 
 export const HomeScreen = () => {
-  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuth();
+  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuthContext();
 
   if (isLoading) {
     return (
