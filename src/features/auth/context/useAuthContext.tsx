@@ -7,15 +7,19 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useAuth0, Credentials, Auth0Provider } from 'react-native-auth0';
-import { User, useUser } from '../../user';
+import {
+  useAuth0,
+  Credentials,
+  Auth0Provider,
+  Auth0User,
+} from 'react-native-auth0';
 
 interface AuthContextProps {
   isLoading: boolean;
   loggedIn: boolean;
   onLogin: () => void;
   onLogout: () => void;
-  user: User;
+  auth0User: Auth0User<null>;
   credentials: Credentials;
 }
 
@@ -30,12 +34,10 @@ const AuthContextWrapper = ({ children }) => {
     user: auth0User,
     getCredentials,
   } = useAuth0();
-  const { useGetUser } = useUser();
-  const { data: registeredUser, refetch: refetchUser } = useGetUser();
 
   const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState(null);
-  const loggedIn = auth0User !== undefined && auth0User !== null;
+  const loggedIn = useMemo(() => !!auth0User, [auth0User]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -51,14 +53,13 @@ const AuthContextWrapper = ({ children }) => {
 
   const onLogin = useCallback(() => {
     setIsLoading(true);
-    authorize({ scope: 'openid profile email', audience: AUTH0_AUDIENCE })
-      .then(() =>
-        refetchUser().then(() => {
-          setIsLoading(false);
-        }),
-      )
+    authorize({
+      scope: 'openid profile email',
+      audience: AUTH0_AUDIENCE,
+    })
+      .then(() => setIsLoading(false))
       .catch(console.error);
-  }, [authorize, refetchUser]);
+  }, [authorize]);
 
   const onLogout = useCallback(() => {
     try {
@@ -71,13 +72,9 @@ const AuthContextWrapper = ({ children }) => {
     }
   }, [clearSession]);
 
-  const user: User = useMemo(() => {
-    return { ...auth0User, ...registeredUser.data } as User;
-  }, [auth0User, registeredUser]);
-
   const payload: AuthContextProps = useMemo(() => {
-    return { isLoading, loggedIn, onLogin, onLogout, user, credentials };
-  }, [isLoading, loggedIn, onLogin, onLogout, user, credentials]);
+    return { isLoading, loggedIn, onLogin, onLogout, auth0User, credentials };
+  }, [isLoading, loggedIn, onLogin, onLogout, auth0User, credentials]);
 
   return (
     <AuthContext.Provider value={payload}>{children}</AuthContext.Provider>
