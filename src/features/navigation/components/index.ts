@@ -1,1 +1,1 @@
-export { NavigationStack } from './navigation-stack/NavigationStack';
+export { NavigationTab } from './navigation-tab/NavigationTab';

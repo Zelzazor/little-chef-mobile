@@ -5,10 +5,11 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../features/auth';
 
-export const HomeScreen = () => {
-  const { isLoading, loggedIn, onLogin, onLogout, user } = useAuth();
+export const LoginScreen = () => {
+  const { isLoading, loggedIn, onLogin, onLogout, auth0User } =
+    useAuthContext();
 
   if (isLoading) {
     return (
@@ -20,10 +21,10 @@ export const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {loggedIn && <Text>You are logged in as {user?.name}</Text>}
-      {!loggedIn && <Text>You are not logged in</Text>}
-
+      {loggedIn && <Text>You are logged in as {auth0User?.name}</Text>}
+      {!loggedIn && <Text style={styles.text}>You are not logged in</Text>}
       <Button
+        color="#CA3433"
         onPress={loggedIn ? onLogout : onLogin}
         title={loggedIn ? 'Log Out' : 'Log In'}
       />
@@ -37,5 +38,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  text: {
+    margin: 20,
+    fontSize: 20,
   },
 });

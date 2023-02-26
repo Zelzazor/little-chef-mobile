@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 . "$(dirname -- "$0")/_/husky.sh"
 
 FILE=$1
@@ -8,6 +8,10 @@ TICKET=$(git rev-parse --abbrev-ref HEAD | grep -Eo '^(\w+/)?(\w+[-_])?[0-9]+' |
 LOWER_MESSAGE=$(echo $MESSAGE | tr "[:upper:]" "[:lower:]")
 
 if [[ "$LOWER_MESSAGE" == $(echo "Merge" | tr "[:upper:]" "[:lower:]")* || $TICKET == ":" || "$MESSAGE" == "$TICKET"* ]];then
+  exit 0;
+fi
+
+if echo $MESSAGE | grep -q "$TICKET" ; then
   exit 0;
 fi
 
