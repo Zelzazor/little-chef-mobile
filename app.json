@@ -34,7 +34,19 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.littlechef.littlechef",
-      "scheme": "littlechef.app"
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "dev-jccuohc5ddd4uqdf.us.auth0.com",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

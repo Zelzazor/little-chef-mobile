@@ -26,6 +26,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="littlechef.app"/>
         <data android:scheme="com.littlechef.littlechef"/>
         <data android:scheme="exp+little-chef"/>
       </intent-filter>
