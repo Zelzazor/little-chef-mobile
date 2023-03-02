@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import IonIcons from '@expo/vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { LoginScreen, ProfileScreen, SearchScreen } from '../../../../screens';
 import { useAuthContext } from '../../../auth';
 
@@ -18,7 +18,7 @@ export const NavigationTab = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName: keyof typeof IonIcons.glyphMap;
+          let iconName: string = '';
           if (route.name === 'Search') {
             iconName = focused ? 'search' : 'search-outline';
           }
@@ -28,7 +28,7 @@ export const NavigationTab = () => {
           if (route.name === 'Login') {
             iconName = focused ? 'log-in' : 'log-in-outline';
           }
-          return <IonIcons name={iconName} size={size} color={color} />;
+          return <Icon name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#CA3433',
         tabBarInactiveTintColor: 'gray',

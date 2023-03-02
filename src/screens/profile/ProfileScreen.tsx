@@ -4,13 +4,11 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  Image
 } from 'react-native';
-import { Image } from 'expo-image';
 import { useAuthContext } from '../../features/auth';
 import { useUserContext } from '../../features/user/context/useUserContext';
 
-const blurhash =
-  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 export const ProfileScreen = () => {
   const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
@@ -37,10 +35,7 @@ export const ProfileScreen = () => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={user?.picture}
-        placeholder={blurhash}
-        contentFit="cover"
-        transition={1000}
+        source={{uri: user?.picture}}
       />
       <Text style={styles.text}>Hello, {user?.name}!</Text>
       <Button color={'#CA3433'} onPress={onLogout} title="Log Out" />

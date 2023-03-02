@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
 import { useAuthContext } from '../../auth';
 import { useUser } from '../hooks';
 import { User } from '../types';
@@ -9,7 +9,7 @@ interface UserContextProps {
 
 const UserContext = createContext<UserContextProps>({} as UserContextProps);
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }: {children: ReactNode}) => {
   const { loggedIn, auth0User, credentials } = useAuthContext();
   const { useGetUser } = useUser();
   const { data: registeredUser, refetch: refetchUser } = useGetUser();
