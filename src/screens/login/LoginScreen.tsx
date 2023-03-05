@@ -4,7 +4,10 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  Platform,
+  StatusBar,
 } from 'react-native';
+import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth';
 
 export const LoginScreen = () => {
@@ -24,7 +27,7 @@ export const LoginScreen = () => {
       {loggedIn && <Text>You are logged in as {auth0User?.name}</Text>}
       {!loggedIn && <Text style={styles.text}>You are not logged in</Text>}
       <Button
-        color="#CA3433"
+        color={config.colors.primary}
         onPress={loggedIn ? onLogout : onLogin}
         title={loggedIn ? 'Log Out' : 'Log In'}
       />
@@ -37,7 +40,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: config.colors.background,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   text: {
     margin: 20,

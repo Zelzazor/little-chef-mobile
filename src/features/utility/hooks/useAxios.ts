@@ -11,7 +11,7 @@ export const useAxios = () => {
       ...AXIOS_CONFIG,
       headers: {
         ...AXIOS_CONFIG.headers,
-        Authorization: `Bearer ${credentials?.accessToken}`,
+        Authorization: `Bearer ${credentials?.accessToken ?? ''}`,
       },
     });
   }, [credentials]);

@@ -1,7 +1,6 @@
-import {AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_AUDIENCE} from '@env';
+import { config } from '../../../config/app.config';
 import {
   createContext,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -10,10 +9,11 @@ import {
 } from 'react';
 import {
   useAuth0,
-  Credentials,
+  type Credentials,
   Auth0Provider,
-  Auth0User,
+  type Auth0User,
 } from 'react-native-auth0';
+import { type FCC } from '../../../config';
 
 interface AuthContextProps {
   isLoading: boolean;
@@ -28,17 +28,22 @@ export const AuthContext = createContext<AuthContextProps>(
   {} as AuthContextProps,
 );
 
-const AuthContextWrapper = ({children}: {children: ReactNode}) => {
-  const {authorize, clearSession, user: auth0User, getCredentials} = useAuth0();
+const AuthContextWrapper: FCC = ({ children }) => {
+  const {
+    authorize,
+    clearSession,
+    user: auth0User,
+    getCredentials,
+  } = useAuth0();
 
   const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState<Credentials | null>(null);
-  const loggedIn = useMemo(() => !!auth0User, [auth0User]);
+  const loggedIn = useMemo(() => Boolean(auth0User), [auth0User]);
 
   useEffect(() => {
     if (loggedIn) {
       getCredentials('openid profile email', 0)
-        .then(creds => {
+        .then((creds) => {
           setCredentials(creds);
         })
         .catch(console.error);
@@ -51,9 +56,11 @@ const AuthContextWrapper = ({children}: {children: ReactNode}) => {
     setIsLoading(true);
     authorize({
       scope: 'openid profile email',
-      audience: AUTH0_AUDIENCE,
+      audience: config.auth0.audience,
     })
-      .then(() => setIsLoading(false))
+      .then(() => {
+        setIsLoading(false);
+      })
       .catch(console.error);
   }, [authorize]);
 
@@ -61,7 +68,9 @@ const AuthContextWrapper = ({children}: {children: ReactNode}) => {
     try {
       setIsLoading(true);
       clearSession()
-        .then(() => setIsLoading(false))
+        .then(() => {
+          setIsLoading(false);
+        })
         .catch(console.error);
     } catch (e) {
       console.log('Log out cancelled');
@@ -69,7 +78,7 @@ const AuthContextWrapper = ({children}: {children: ReactNode}) => {
   }, [clearSession]);
 
   const payload: AuthContextProps = useMemo(() => {
-    return {isLoading, loggedIn, onLogin, onLogout, auth0User, credentials};
+    return { isLoading, loggedIn, onLogin, onLogout, auth0User, credentials };
   }, [isLoading, loggedIn, onLogin, onLogout, auth0User, credentials]);
 
   return (
@@ -77,12 +86,16 @@ const AuthContextWrapper = ({children}: {children: ReactNode}) => {
   );
 };
 
-export const AuthProvider = ({children}: {children: ReactNode}) => {
+export const AuthProvider: FCC = ({ children }) => {
   return (
-    <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}>
+    <Auth0Provider
+      domain={config.auth0.domain}
+      clientId={config.auth0.clientId}
+    >
       <AuthContextWrapper>{children}</AuthContextWrapper>
     </Auth0Provider>
   );
 };
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext: () => AuthContextProps = () =>
+  useContext(AuthContext);
