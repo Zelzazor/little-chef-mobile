@@ -1,6 +1,6 @@
 import { type Auth0User } from 'react-native-auth0';
 
-export interface RegisteredUser {
+export type RegisteredUser = {
   id: string;
   subject: string;
   name: string | null;
