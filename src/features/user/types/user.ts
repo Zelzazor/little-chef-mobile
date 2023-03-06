@@ -1,4 +1,4 @@
-import { Auth0User } from 'react-native-auth0';
+import { type Auth0User } from 'react-native-auth0';
 
 export type RegisteredUser = {
   id: string;
@@ -11,6 +11,6 @@ export type RegisteredUser = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
-};
+}
 
 export type User = Omit<Auth0User<null>, 'userId'> & RegisteredUser;

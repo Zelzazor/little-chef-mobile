@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
+import { type FCC } from '../../../config';
 import { useAuthContext } from '../../auth';
 import { useUser } from '../hooks';
-import { User } from '../types';
+import { type User } from '../types';
 
 interface UserContextProps {
   user: User;
@@ -9,13 +10,13 @@ interface UserContextProps {
 
 const UserContext = createContext<UserContextProps>({} as UserContextProps);
 
-export const UserProvider = ({ children }: {children: ReactNode}) => {
+export const UserProvider: FCC = ({ children }) => {
   const { loggedIn, auth0User, credentials } = useAuthContext();
   const { useGetUser } = useUser();
   const { data: registeredUser, refetch: refetchUser } = useGetUser();
 
   useEffect(() => {
-    if (loggedIn && !!credentials) {
+    if (loggedIn && !(credentials == null)) {
       refetchUser().catch(console.error);
     }
   }, [credentials, loggedIn, refetchUser]);
@@ -33,4 +34,5 @@ export const UserProvider = ({ children }: {children: ReactNode}) => {
   );
 };
 
-export const useUserContext = () => useContext(UserContext);
+export const useUserContext: () => UserContextProps = () =>
+  useContext(UserContext);

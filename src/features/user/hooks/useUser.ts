@@ -1,7 +1,6 @@
-
 import { useQuery } from 'react-query';
 import { useAxios } from '../../utility';
-import { GetUserResponse } from '../types';
+import { type GetUserResponse } from '../types';
 
 export const useUser = () => {
   const { axios } = useAxios();
@@ -11,14 +10,14 @@ export const useUser = () => {
     useQuery(
       'user',
       async () => {
-        return axios.get<GetUserResponse>(URL);
+        return await axios.get<GetUserResponse>(URL);
       },
       { enabled: false },
     );
 
   const useTest = () =>
     useQuery('test', async () => {
-      return axios.get<GetUserResponse>(`${URL}/auth`);
+      return await axios.get<GetUserResponse>(`${URL}/auth`);
     });
 
   return { useGetUser, useTest };

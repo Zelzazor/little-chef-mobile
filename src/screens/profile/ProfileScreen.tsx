@@ -1,16 +1,19 @@
+import { type FC } from 'react';
 import {
   View,
   Button,
   Text,
   StyleSheet,
   ActivityIndicator,
-  Image
+  Image,
+  Platform,
+  StatusBar,
 } from 'react-native';
+import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth';
 import { useUserContext } from '../../features/user/context/useUserContext';
 
-
-export const ProfileScreen = () => {
+export const ProfileScreen: FC = () => {
   const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
   const { user } = useUserContext();
 
@@ -33,12 +36,13 @@ export const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{uri: user?.picture}}
-      />
+      <Image style={styles.image} source={{ uri: user?.picture }} />
       <Text style={styles.text}>Hello, {user?.name}!</Text>
-      <Button color={'#CA3433'} onPress={onLogout} title="Log Out" />
+      <Button
+        color={config.colors.primary}
+        onPress={onLogout}
+        title="Log Out"
+      />
     </View>
   );
 };
@@ -48,7 +52,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: config.colors.background,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   image: {
     width: 100,
