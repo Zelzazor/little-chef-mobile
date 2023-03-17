@@ -10,7 +10,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { config } from '../../config/app.config';
-import { useAuthContext } from '../../features/auth';
+import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { useUserContext } from '../../features/user/context/useUserContext';
 
 export const ProfileScreen: FC = () => {

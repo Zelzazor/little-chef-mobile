@@ -8,7 +8,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { config } from '../../config/app.config';
-import { useAuthContext } from '../../features/auth';
+import { useAuthContext } from '../../features/auth/context/useAuthContext';
 
 export const LoginScreen = () => {
   const { isLoading, loggedIn, onLogin, onLogout, auth0User } =
