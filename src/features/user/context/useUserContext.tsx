@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { type FCC } from '../../../config';
-import { useAuthContext } from '../../auth';
-import { useUser } from '../hooks';
-import { type User } from '../types';
+import { useAuthContext } from '../../auth/context/useAuthContext';
+import { useUser } from '../hooks/useUser';
+import { User } from '../types/user';
 
 interface UserContextProps {
   user: User;
