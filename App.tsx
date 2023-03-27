@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { AuthProvider } from './src/features/auth';
-import { NavigationTab } from './src/features/navigation';
+import { AuthProvider } from './src/features/auth/context/useAuthContext';
+import { NavigationTab } from './src/features/navigation/NavigationTab';
 import { UserProvider } from './src/features/user/context/useUserContext';
 
 const queryClient = new QueryClient();
