@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { NavigationTab } from './src/features/navigation';
-import { AuthProvider } from './src/features/auth';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { UserProvider } from './src/features/user/context/useUserContext';
+import { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { AuthProvider } from './src/features/auth/context/useAuthContext';
+import { NavigationTab } from './src/features/navigation/NavigationTab';
+import { UserProvider } from './src/features/user/context/useUserContext';
 
 const queryClient = new QueryClient();
 
 const useHideSplashScreen = () => {
   useEffect(() => {
     SplashScreen.hide();
+
+    return () => {
+      SplashScreen.show();
+    };
   }, []);
 };
 

@@ -1,12 +1,12 @@
 import { Input } from '@rneui/base';
 import { useState } from 'react';
 import {
+  FlatList,
+  Platform,
+  StatusBar,
   StyleSheet,
   Text,
   View,
-  Platform,
-  StatusBar,
-  FlatList,
 } from 'react-native';
 import { config } from '../../config/app.config';
 
@@ -25,7 +25,7 @@ export const SearchScreen = () => {
         }}
         value={search}
         leftIcon={{ type: 'ion-icons', name: 'search' }}
-      ></Input>
+      />
       <FlatList
         data={list}
         renderItem={({ item }) => (

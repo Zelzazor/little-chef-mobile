@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type FC } from 'react';
-import { config } from '../../../../config/app.config';
-import { LoginScreen } from '../../../../screens/login/LoginScreen';
-import { ProfileScreen } from '../../../../screens/profile/ProfileScreen';
-import { PublishScreen } from '../../../../screens/publish/PublishScreen';
-import { SearchScreen } from '../../../../screens/search/SearchScreen';
-import { useAuthContext } from '../../../auth/context/useAuthContext';
+import { config } from '../../config/app.config';
+import { LoginScreen } from '../../screens/login/LoginScreen';
+import { ProfileScreen } from '../../screens/profile/ProfileScreen';
+import { PublishScreen } from '../../screens/publish/PublishScreen';
+import { SearchScreen } from '../../screens/search/SearchScreen';
+import { useAuthContext } from '../auth/context/useAuthContext';
 import { SelectIcon } from './components/SelectIcon';
 import { type TabParamList } from './types';
 
