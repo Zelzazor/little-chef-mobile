@@ -17,7 +17,7 @@ export const SelectIcon: FC<SelectIconProps> = ({
   color,
 }) => {
   const icons = {
-    Search: {
+    SearchIndex: {
       active: 'search',
       inactive: 'search-outline',
     },

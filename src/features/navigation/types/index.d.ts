@@ -1,6 +1,6 @@
 export type TabParamList = {
   Profile: undefined;
-  Search: undefined;
+  SearchIndex: undefined;
   Login: undefined;
   Publish: undefined;
 };
