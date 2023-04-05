@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useAxios } from '../../utility/hooks/useAxios';
-import { GetUserResponse } from '../types/get-user';
+import { type GetUserResponse } from '../types/get-user';
 
 export const useUser = () => {
   const { axios } = useAxios();
