@@ -4,10 +4,12 @@ import { Button } from '@rneui/themed';
 import { useState } from 'react';
 import {
   FlatList,
+  LogBox,
   Platform,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableNativeFeedback,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,65 +21,76 @@ export const SearchScreen = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      <TouchableNativeFeedback
         onPress={() => {
           navigation.navigate('Ingredient');
         }}
       >
         <View style={styles.buttonIngre}>
-          <Text style={styles.buttonTextIngredients}>Ingredients</Text>
+          <Text style={styles.buttonTextIngredients}>
+            Search by{'\n'}
+            Ingredients
+          </Text>
         </View>
-      </TouchableOpacity>
-      <Otro />
-      <TouchableOpacity
+      </TouchableNativeFeedback>
+
+      <View style={styles.space} />
+
+      <TouchableNativeFeedback
         onPress={() => {
           navigation.navigate('Recipe');
         }}
       >
         <View style={styles.buttonRecipe}>
-          <Text style={styles.buttonTextRecipe}>Recipes</Text>
+          <Text style={styles.buttonTextRecipe}>
+            Search by{'\n'}
+            Recipes
+          </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: config.colors.background,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   buttonIngre: {
-    width: '70%',
+    width: '100%',
     backgroundColor: 'red',
-    borderRadius: 30,
-    alignItems: 'center',
     alignSelf: 'center',
-    marginTop: '30%',
+    height: '50%',
+    justifyContent: 'center',
+    opacity: 0.6,
   },
   buttonTextIngredients: {
     textAlign: 'center',
-    padding: 20,
-    color: 'white',
-    fontSize: 20,
+    color: '#69140E',
+    fontSize: 50,
     fontWeight: 'bold',
   },
 
   buttonRecipe: {
-    width: 160,
-    alignItems: 'center',
+    width: '100%',
     backgroundColor: '#2196F3',
-    borderRadius: 30,
-    justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
-    marginTop: '30%',
+    justifyContent: 'center',
+    height: '50%',
+    opacity: 0.5,
   },
+
   buttonTextRecipe: {
     textAlign: 'center',
-    padding: 20,
-    color: 'white',
-    fontSize: 20,
+    color: '#69140E',
+    fontSize: 50,
     fontWeight: 'bold',
+  },
+
+  space: {
+    width: '100%',
+    height: '2%',
   },
 });
