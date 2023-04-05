@@ -3,7 +3,7 @@ import { config } from '../../config/app.config';
 export const SearchIngredientScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Hello Recipe</Text>
+      <Text>Hello Ingredient</Text>
     </View>
   );
 };
