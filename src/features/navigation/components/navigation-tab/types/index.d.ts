@@ -3,4 +3,5 @@ export type TabParamList = {
   Search: undefined;
   Login: undefined;
   Publish: undefined;
+  RecipeReview: undefined; 
 };

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type FC } from 'react';
 import { config } from '../../../../config/app.config';
-import { LoginScreen, ProfileScreen, SearchScreen } from '../../../../screens';
+import { LoginScreen, ProfileScreen, RecipeScreen, SearchScreen } from '../../../../screens';
 import { PublishScreen } from '../../../../screens/publish/PublishScreen';
 import { useAuthContext } from '../../../auth';
 import { SelectIcon } from './components/SelectIcon';
@@ -32,6 +32,7 @@ export const NavigationTab: FC = () => {
       })}
     >
       <Tab.Screen name="Search" component={SearchScreen} />
+      {loggedIn && <Tab.Screen name="RecipeReview" component={RecipeScreen} />}
       {loggedIn && <Tab.Screen name="Publish" component={PublishScreen} />}
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
       {!loggedIn && <Tab.Screen name="Login" component={LoginScreen} />}

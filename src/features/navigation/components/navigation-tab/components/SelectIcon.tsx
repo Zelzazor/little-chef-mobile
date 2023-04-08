@@ -33,6 +33,10 @@ export const SelectIcon: FC<SelectIconProps> = ({
       active: 'add-circle',
       inactive: 'add-circle-outline',
     },
+    RecipeReview: {
+      active: 'receipt',
+      inactive: 'receipt-outline',
+    },
   };
 
   const iconName = focused
