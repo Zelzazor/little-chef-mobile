@@ -1,20 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { Input } from '@rneui/base';
-import { Button } from '@rneui/themed';
-import { useState } from 'react';
-import {
-  FlatList,
-  LogBox,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import { config } from '../../config/app.config';
-import { Otro } from './Otro';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchScreen = () => {
@@ -26,7 +12,7 @@ export const SearchScreen = () => {
           navigation.navigate('Ingredient');
         }}
       >
-        <View style={styles.buttonIngre}>
+        <View style={styles.buttonIngredients}>
           <Text style={styles.buttonTextIngredients}>
             Search by{'\n'}
             Ingredients
@@ -34,7 +20,9 @@ export const SearchScreen = () => {
         </View>
       </TouchableNativeFeedback>
 
-      <View style={styles.space} />
+      <View style={styles.space}>
+        <Text style={styles.textSpace}>Or</Text>
+      </View>
 
       <TouchableNativeFeedback
         onPress={() => {
@@ -54,15 +42,14 @@ export const SearchScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: config.colors.background,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
-  buttonIngre: {
+  buttonIngredients: {
     width: '100%',
     backgroundColor: 'red',
-    alignSelf: 'center',
-    height: '50%',
     justifyContent: 'center',
+    flexGrow: 1,
     opacity: 0.6,
   },
   buttonTextIngredients: {
@@ -75,11 +62,9 @@ const styles = StyleSheet.create({
   buttonRecipe: {
     width: '100%',
     backgroundColor: '#2196F3',
-    alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'center',
-    height: '50%',
     opacity: 0.5,
+    flexGrow: 1,
   },
 
   buttonTextRecipe: {
@@ -91,6 +76,9 @@ const styles = StyleSheet.create({
 
   space: {
     width: '100%',
-    height: '2%',
+    alignItems: 'center',
+  },
+  textSpace: {
+    fontSize: 20,
   },
 });

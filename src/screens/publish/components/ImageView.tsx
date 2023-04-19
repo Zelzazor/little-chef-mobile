@@ -1,5 +1,7 @@
+import { type NavigationProp, type RouteProp } from '@react-navigation/native';
 import { Button } from '@rneui/themed';
 import {
+  ActivityIndicator,
   Alert,
   Image,
   Platform,
@@ -9,18 +11,37 @@ import {
 } from 'react-native';
 import { type FCC } from '../../../config';
 import { config } from '../../../config/app.config';
+import { useSubmissions } from '../../../features/submission/hooks/useSubmission';
+import { type SearchStackParamList } from '../../search/types';
+
+type Route = RouteProp<SearchStackParamList, 'Publish'>;
+type Navigation = NavigationProp<SearchStackParamList, 'Publish'>;
 
 interface ImageViewProps {
   resolution: { width: number; height: number };
   setPhoto: (photo: null) => void;
   path: string;
+  route: Route;
+  navigation: Navigation;
 }
 
 export const ImageView: FCC<ImageViewProps> = ({
   resolution,
   setPhoto,
   path,
+  route,
+  navigation,
 }) => {
+  const { isLoading, mutate: publishSubmission } =
+    useSubmissions().usePublishSubmission();
+
+  if (isLoading)
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size={48} color={config.colors.primary} />
+      </View>
+    );
+
   return (
     <View style={styles.container}>
       <Image
@@ -69,9 +90,18 @@ export const ImageView: FCC<ImageViewProps> = ({
             size: 75,
           }}
           onPress={() => {
-            Alert.alert('Upload', 'Uploaded image to server', undefined, {
-              userInterfaceStyle: 'light',
-            });
+            publishSubmission(
+              {
+                imageUri: path,
+                recipeId: route.params.recipeId,
+              },
+              {
+                onSuccess: () => {
+                  Alert.alert('Success', 'Your submission has been published!');
+                  navigation.navigate('Search');
+                },
+              },
+            );
           }}
         />
       </View>
@@ -83,6 +113,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: config.colors.background,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: config.colors.background,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },

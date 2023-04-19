@@ -1,7 +1,9 @@
+import { type Ingredient, type Recipe } from '../types';
+
 export const initialState = {
   count: 0,
-  ingredients: [] as any[],
-  recipes: [] as any[],
+  ingredients: [] as Ingredient[],
+  recipes: [] as Recipe[],
 };
 
 const actions = {
@@ -19,11 +21,11 @@ function decrement(state: typeof initialState) {
   return { count: state.count - 1 };
 }
 
-function addToList(state: typeof initialState, payload: any) {
+function addToList(state: typeof initialState, payload: Ingredient) {
   return { ingredients: state.ingredients.concat([payload]) };
 }
 
-function removeFromList(state: typeof initialState, id: number) {
+function removeFromList(state: typeof initialState, id: string) {
   return {
     ingredients: state.ingredients.filter((ingredient) => ingredient.id !== id),
   };

@@ -1,21 +1,15 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { type FCC } from '../../../config';
 import { initialState, searchReducer } from '../reducer/searchReducer';
+import { type Ingredient } from '../types';
 
 interface SearchContextProps {
   count: number;
-  ingredients: any[];
+  ingredients: Ingredient[];
   increment: () => void;
   decrement: () => void;
-  addToList: (payload: any) => void;
-  removeFromList: (payload: number) => void;
+  addToList: (payload: Ingredient) => void;
+  removeFromList: (payload: string) => void;
 }
 
 const SearchContext = createContext<SearchContextProps>(
@@ -33,14 +27,14 @@ export const SearchProvider: FCC = ({ children }) => {
     dispatch({ type: 'DECREMENT' });
   };
 
-  const addToList = (payload: any) => {
+  const addToList = (payload: Ingredient) => {
     dispatch({
       type: 'ADD_TO_LIST',
       payload,
     });
   };
 
-  const removeFromList = (payload: number) => {
+  const removeFromList = (payload: string) => {
     dispatch({
       type: 'REMOVE_FROM_LIST',
       payload,

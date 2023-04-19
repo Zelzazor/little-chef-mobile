@@ -1,19 +1,22 @@
-import { type FC } from 'react';
+import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import {
-  View,
-  Button,
-  Text,
-  StyleSheet,
   ActivityIndicator,
+  Button,
   Image,
   Platform,
   StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
+import { type TabParamList } from '../../features/navigation/types';
 import { useUserContext } from '../../features/user/context/useUserContext';
 
-export const ProfileScreen: FC = () => {
+type ProfileScreenProps = BottomTabScreenProps<TabParamList, 'Profile'>;
+
+export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
   const { user } = useUserContext();
 
@@ -43,6 +46,15 @@ export const ProfileScreen: FC = () => {
         onPress={onLogout}
         title="Log Out"
       />
+      <View style={{ marginTop: 10 }}>
+        <Button
+          color={config.colors.primary}
+          onPress={() => {
+            navigation.navigate('SearchIndex', { screen: 'Submissions' });
+          }}
+          title="My submissions"
+        />
+      </View>
     </View>
   );
 };

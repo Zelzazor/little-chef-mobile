@@ -1,4 +1,5 @@
 import { useIsFocused } from '@react-navigation/native';
+import { type StackScreenProps } from '@react-navigation/stack';
 import { useRef, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import {
@@ -6,15 +7,21 @@ import {
   useCameraDevices,
   type PhotoFile,
 } from 'react-native-vision-camera';
+import { type SearchStackParamList } from '../search/types';
 import { CameraView } from './components/CameraView';
 import { ImageView } from './components/ImageView';
+
+type PublishScreenProps = StackScreenProps<SearchStackParamList, 'Publish'>;
 /**
  * The PublishScreen component
  * @param {object} props The props of the PublishScreen component
  * @param {object} props.navigation The navigation object
  * @returns {JSX.Element} The PublishScreen component
  */
-export const PublishScreen = (): JSX.Element => {
+export const PublishScreen = ({
+  route,
+  navigation,
+}: PublishScreenProps): JSX.Element => {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const devices = useCameraDevices();
@@ -32,14 +39,20 @@ export const PublishScreen = (): JSX.Element => {
   };
 
   const takePhoto = async () => {
-    const newPhoto = await cameraRef.current?.takePhoto();
+    const newPhoto = await cameraRef.current?.takeSnapshot();
     setPhoto(newPhoto);
   };
 
   if (photo != null) {
     const path = `file://${photo.path}`;
     return (
-      <ImageView resolution={resolution} setPhoto={setPhoto} path={path} />
+      <ImageView
+        resolution={resolution}
+        setPhoto={setPhoto}
+        path={path}
+        route={route}
+        navigation={navigation}
+      />
     );
   }
   return (

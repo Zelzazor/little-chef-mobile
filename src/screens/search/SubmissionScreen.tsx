@@ -1,23 +1,27 @@
-import { SearchBar } from '@rneui/themed';
+import { type StackScreenProps } from '@react-navigation/stack';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useRecipes } from '../../features/search/hooks/useRecipes';
-import { useDebounce } from '../../features/utility/hooks/useDebounce';
-import { RecipeList } from './components/RecipeList';
+import { useSubmissions } from '../../features/submission/hooks/useSubmission';
+import { SubmissionList } from './components/SubmissionList';
+import { type SearchStackParamList } from './types';
 
-export const SearchRecipeScreen = () => {
-  const recipeQueries = useRecipes();
+type SubmissionsScreenProps = StackScreenProps<
+  SearchStackParamList,
+  'Submissions'
+>;
+
+export const SubmissionScreen = ({ route }: SubmissionsScreenProps) => {
+  const submissionQueries = useSubmissions();
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 500);
+
   const {
     data: response,
     isLoading,
     isError,
-  } = recipeQueries.useGetRecipes({
+  } = submissionQueries.useGetSubmissions({
     pageSize: 6,
     page,
-    ...(debouncedSearch && { name: debouncedSearch }),
+    ...(route.params?.recipeId && { recipeId: route.params.recipeId }),
   });
 
   const nextPage = () => {
@@ -34,15 +38,7 @@ export const SearchRecipeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SearchBar
-        platform="android"
-        placeholder="Search"
-        style={{ borderColor: '#ccc', borderBottomWidth: 1 }}
-        onChangeText={(e) => {
-          setSearch(e);
-        }}
-      />
-      <RecipeList
+      <SubmissionList
         data={response?.data}
         isLoading={isLoading}
         isError={isError}
