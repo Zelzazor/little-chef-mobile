@@ -63,7 +63,11 @@ export const RecipeList = ({
       )}
       keyExtractor={(recipe: Recipe) => recipe.id}
       ListFooterComponent={() => (
-        <Pagination data={data} prevPage={prevPage} nextPage={nextPage} />
+        <Pagination
+          pagination={data?.pagination}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       )}
     />
   );

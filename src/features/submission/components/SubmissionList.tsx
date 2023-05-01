@@ -50,7 +50,11 @@ export const SubmissionList = ({
       )}
       keyExtractor={(submission: Submission) => submission.id}
       ListFooterComponent={() => (
-        <Pagination data={data} prevPage={prevPage} nextPage={nextPage} />
+        <Pagination
+          pagination={data?.pagination}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       )}
     />
   );

@@ -1,4 +1,4 @@
-export type Pagination = {
+export type PaginationMetadata = {
   page: number;
   pageSize: number;
   totalItems: number;
@@ -7,5 +7,5 @@ export type Pagination = {
 
 export type GetPaginatedResponse<T> = {
   data: T[];
-  pagination: Pagination;
+  pagination: PaginationMetadata;
 };
