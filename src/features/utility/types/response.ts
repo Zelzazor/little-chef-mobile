@@ -1,11 +1,11 @@
-export type PaginationResponse = {
+export type Pagination = {
   page: number;
   pageSize: number;
   totalItems: number;
   totalPages: number;
 };
 
-export type GetResponse<T> = {
+export type GetPaginatedResponse<T> = {
   data: T[];
-  pagination: PaginationResponse;
+  pagination: Pagination;
 };

@@ -1,4 +1,4 @@
-import { type GetResponse } from '../../utility/types/response';
+import { type GetPaginatedResponse } from '../../utility/types/response';
 
 export type GetSubmissionsRequestParams = {
   id?: string;
@@ -12,7 +12,7 @@ export type GetSubmissionsRequestParams = {
   pageSize?: number;
 };
 
-export type GetSubmissionsResponse = GetResponse<Submission>;
+export type GetSubmissionsResponse = GetPaginatedResponse<Submission>;
 
 export type Submission = {
   id: string;

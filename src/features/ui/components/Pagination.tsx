@@ -1,9 +1,9 @@
 import { Pressable, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { type GetResponse } from '../../utility/types/response';
+import { type GetPaginatedResponse } from '../../utility/types/response';
 
 interface PaginationProps {
-  data: GetResponse<any> | undefined;
+  data: GetPaginatedResponse<any> | undefined;
   prevPage: () => void;
   nextPage: () => void;
 }
