@@ -1,9 +1,9 @@
 import { SearchBar } from '@rneui/themed';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { RecipeList } from '../../features/search/components/RecipeList';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
-import { RecipeList } from './components/RecipeList';
 
 export const SearchRecipeScreen = () => {
   const recipeQueries = useRecipes();

@@ -6,12 +6,9 @@ import {
   Pressable,
   Text,
 } from 'react-native';
-import {
-  type GetRecipesResponse,
-  type Recipe,
-} from '../../../features/search/types';
-import { type SearchStackNavigationParams } from '../SearchStackNavigation';
-import { Pagination } from './Pagination';
+import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
+import { Pagination } from '../../ui/components/Pagination';
+import { type GetRecipesResponse, type Recipe } from '../types';
 
 interface RecipeListProps {
   data: GetRecipesResponse | undefined;

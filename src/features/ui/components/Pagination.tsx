@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { type GetResponse } from '../../../features/utility/types';
+import { type GetResponse } from '../../utility/types';
 
 interface PaginationProps {
   data: GetResponse<any> | undefined;
