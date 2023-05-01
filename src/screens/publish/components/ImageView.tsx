@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import { type FCC } from '../../../config';
 import { config } from '../../../config/app.config';
+import { type SearchStackParamList } from '../../../features/search/types';
 import { useSubmissions } from '../../../features/submission/hooks/useSubmission';
-import { type SearchStackParamList } from '../../search/types';
 
 type Route = RouteProp<SearchStackParamList, 'Publish'>;
 type Navigation = NavigationProp<SearchStackParamList, 'Publish'>;

@@ -2,13 +2,13 @@ import { type NavigationProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { SearchProvider } from '../../features/search/context/SearchContext';
+import { type SearchStackParamList } from '../../features/search/types';
 import { PublishScreen } from '../publish/PublishScreen';
 import { RecipeDetailsScreen } from './RecipeDetailsScreen';
 import { SearchIngredientScreen } from './SearchIngredientScreen';
 import { SearchRecipeScreen } from './SearchRecipeScreen';
 import { SearchScreen } from './SearchScreen';
 import { SubmissionScreen } from './SubmissionScreen';
-import { type SearchStackParamList } from './types';
 
 export type SearchStackNavigationParams = NavigationProp<SearchStackParamList>;
 

@@ -1,4 +1,4 @@
-import { type GetResponse } from '../../utility/types';
+import { type GetResponse } from '../../utility/types/response';
 
 export type GetSubmissionsRequestParams = {
   id?: string;

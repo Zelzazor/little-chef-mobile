@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
-import { type SearchStackParamList } from './types';
+import { type SearchStackParamList } from '../../features/search/types';
 
 type RecipeDetailsScreenProps = StackScreenProps<
   SearchStackParamList,

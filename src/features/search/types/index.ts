@@ -1,4 +1,4 @@
-import { type GetResponse } from '../../utility/types';
+import { type GetResponse } from '../../utility/types/response';
 
 export type GetRecipesRequestParams = {
   name?: string;
@@ -45,4 +45,13 @@ export type Tag = {
   tagTypeId: string;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type SearchStackParamList = {
+  Search: undefined;
+  Recipe: undefined;
+  Ingredient: undefined;
+  RecipeDetails: { recipeId: string };
+  Publish: { recipeId: string };
+  Submissions: { recipeId?: string };
 };

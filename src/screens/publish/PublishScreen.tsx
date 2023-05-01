@@ -7,7 +7,7 @@ import {
   useCameraDevices,
   type PhotoFile,
 } from 'react-native-vision-camera';
-import { type SearchStackParamList } from '../search/types';
+import { type SearchStackParamList } from '../../features/search/types';
 import { CameraView } from './components/CameraView';
 import { ImageView } from './components/ImageView';
 
