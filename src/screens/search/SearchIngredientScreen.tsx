@@ -27,13 +27,13 @@ export const SearchIngredientScreen = () => {
   const prevPage = () => {
     if (page > 1) setPage(page - 1);
   };
-
   return (
     <View style={styles.container}>
+      <Text style={styles.pageTitle}>Select your ingredients</Text>
       <SearchBar
         platform="android"
         placeholder="Search"
-        style={{ borderColor: '#ccc', borderBottomWidth: 1 }}
+        style={styles.searchBar}
         onChangeText={(e) => {
           setSearch(e);
         }}
@@ -42,23 +42,18 @@ export const SearchIngredientScreen = () => {
         data={data?.ingredients}
         renderItem={({ item: ingredient }) => (
           <Pressable
-            style={{
-              padding: 30,
-              borderColor: '#CCCCCC',
-              borderBottomWidth: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
+            style={styles.ingredientOption}
             onPress={() => {
               console.log({ ingredient });
             }}
           >
-            <UrlImage
-              source={{ uri: ingredient.imageUrl }}
-              style={{ width: '50%', aspectRatio: 1, borderRadius: 10 }}
-            />
-            <Text>{ingredient.name}</Text>
+            <View style={styles.ingredientImageContainer}>
+              <UrlImage
+                source={{ uri: ingredient.imageUrl }}
+                style={styles.ingredientImage}
+              />
+            </View>
+            <Text style={{ fontSize: 25 }}>{ingredient.name}</Text>
           </Pressable>
         )}
         keyExtractor={(ingredient: Ingredient) => ingredient.id}
@@ -78,5 +73,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: config.colors.background,
+  },
+
+  pageTitle: {
+    padding: 10,
+    fontSize: 32,
+  },
+
+  searchBar: { borderColor: '#ccc', borderBottomWidth: 1 },
+
+  ingredientOption: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderColor: '#CCCCCC',
+    height: 100,
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+
+  ingredientImageContainer: { height: '100%', width: 'auto' },
+
+  ingredientImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+    aspectRatio: 1,
+    borderRadius: 10,
   },
 });
