@@ -1,17 +1,11 @@
 import { SearchBar } from '@rneui/base';
 import { useState } from 'react';
-import {
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { config } from '../../config/app.config';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
 import { Pagination } from '../../features/ui/components/Pagination';
+import { UrlImage } from '../../features/ui/components/UrlImage';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 
 export const SearchIngredientScreen = () => {
@@ -60,7 +54,7 @@ export const SearchIngredientScreen = () => {
               console.log({ ingredient });
             }}
           >
-            <Image
+            <UrlImage
               source={{ uri: ingredient.imageUrl }}
               style={{ width: '50%', aspectRatio: 1, borderRadius: 10 }}
             />

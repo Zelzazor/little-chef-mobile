@@ -1,13 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Pressable,
-  Text,
-} from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, Text } from 'react-native';
 import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
 import { Pagination } from '../../ui/components/Pagination';
+import { UrlImage } from '../../ui/components/UrlImage';
 import { type GetRecipesResponse, type Recipe } from '../types';
 
 interface RecipeListProps {
@@ -54,7 +49,7 @@ export const RecipeList = ({
             });
           }}
         >
-          <Image
+          <UrlImage
             source={{ uri: recipe.item.imageUrl }}
             style={{ width: '50%', aspectRatio: 1, borderRadius: 10 }}
           />
