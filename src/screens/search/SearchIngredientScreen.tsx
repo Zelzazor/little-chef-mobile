@@ -1,14 +1,24 @@
+import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/base';
 import { useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Button,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { config } from '../../config/app.config';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
 import { Pagination } from '../../features/ui/components/Pagination';
 import { UrlImage } from '../../features/ui/components/UrlImage';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
+import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchIngredientScreen = () => {
+  const navigation = useNavigation<SearchStackNavigationParams>();
   const { useGetIngredients } = useIngredients();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -29,7 +39,15 @@ export const SearchIngredientScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>Select your ingredients</Text>
+      <View>
+        <Text style={styles.pageTitle}>Select your ingredients</Text>
+        <Button
+          title=""
+          onPress={() => {
+            navigation.navigate('IngredientList');
+          }}
+        />
+      </View>
       <SearchBar
         platform="android"
         placeholder="Search"

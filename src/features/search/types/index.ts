@@ -56,6 +56,7 @@ export type SearchStackParamList = {
   RecipeDetails: { recipeId: string };
   Publish: { recipeId: string };
   Submissions: { recipeId?: string };
+  IngredientList: undefined;
 };
 
 export type GetIngredientsRequest = PaginatedRequest & {
