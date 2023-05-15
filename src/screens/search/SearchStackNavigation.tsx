@@ -1,7 +1,7 @@
 import { type NavigationProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
-import { SearchProvider } from '../../features/search/context/SearchContext';
+import { IngredientSearchProvider } from '../../features/search/context/IngredientSearchContext';
 import { type SearchStackParamList } from '../../features/search/types';
 import { PublishScreen } from '../publish/PublishScreen';
 import { IngredientList } from './IngredientList';
@@ -17,7 +17,7 @@ const Stack = createStackNavigator<SearchStackParamList>();
 export const SearchStackNavigation = () => {
   const { loggedIn } = useAuthContext();
   return (
-    <SearchProvider>
+    <IngredientSearchProvider>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName="Search"
@@ -32,6 +32,6 @@ export const SearchStackNavigation = () => {
           <Stack.Screen name="Submissions" component={SubmissionScreen} />
         )}
       </Stack.Navigator>
-    </SearchProvider>
+    </IngredientSearchProvider>
   );
 };
