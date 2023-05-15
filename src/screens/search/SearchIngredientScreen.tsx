@@ -1,20 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/base';
 import { useMemo, useState } from 'react';
-import {
-  Button,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { config } from '../../config/app.config';
+import { IngredientList } from '../../features/search/components/IngredientList';
 import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
-import { Pagination } from '../../features/ui/components/Pagination';
-import { UrlImage } from '../../features/ui/components/UrlImage';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
@@ -65,32 +57,14 @@ export const SearchIngredientScreen = () => {
           setSearch(e);
         }}
       />
-      <FlatList
-        data={filteredIngredients}
-        renderItem={({ item: ingredient }) => (
-          <Pressable
-            style={styles.ingredientOption}
-            onPress={() => {
-              addIngredient(ingredient);
-            }}
-          >
-            <View style={styles.ingredientImageContainer}>
-              <UrlImage
-                source={{ uri: ingredient.imageUrl }}
-                style={styles.ingredientImage}
-              />
-            </View>
-            <Text style={{ fontSize: 25 }}>{ingredient.name}</Text>
-          </Pressable>
-        )}
-        keyExtractor={(ingredient: Ingredient) => ingredient.id}
-        ListFooterComponent={() => (
-          <Pagination
-            pagination={data?.pagination}
-            prevPage={prevPage}
-            nextPage={nextPage}
-          />
-        )}
+      <IngredientList
+        data={filteredIngredients ?? []}
+        pagination={data?.pagination}
+        onPress={(ingredient: Ingredient) => {
+          addIngredient(ingredient);
+        }}
+        prevPage={prevPage}
+        nextPage={nextPage}
       />
     </View>
   );
@@ -108,25 +82,4 @@ const styles = StyleSheet.create({
   },
 
   searchBar: { borderColor: '#ccc', borderBottomWidth: 1 },
-
-  ingredientOption: {
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderColor: '#CCCCCC',
-    height: 100,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-  },
-
-  ingredientImageContainer: { height: '100%', width: 'auto' },
-
-  ingredientImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-    aspectRatio: 1,
-    borderRadius: 10,
-  },
 });
