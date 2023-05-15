@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/base';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Button,
   FlatList,
@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { config } from '../../config/app.config';
+import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
 import { Pagination } from '../../features/ui/components/Pagination';
@@ -28,6 +29,13 @@ export const SearchIngredientScreen = () => {
     page,
     ...(debouncedSearch && { name: debouncedSearch }),
   });
+  const { ingredients, addIngredient } = useIngredientSearchContext();
+
+  const filteredIngredients = useMemo(() => {
+    return data?.ingredients?.filter((ingredient) => {
+      return !ingredients.includes(ingredient);
+    });
+  }, [data, ingredients]);
 
   const nextPage = () => {
     if (data && data.pagination.page < data.pagination.totalPages)
@@ -37,6 +45,7 @@ export const SearchIngredientScreen = () => {
   const prevPage = () => {
     if (page > 1) setPage(page - 1);
   };
+
   return (
     <View style={styles.container}>
       <View>
@@ -57,12 +66,12 @@ export const SearchIngredientScreen = () => {
         }}
       />
       <FlatList
-        data={data?.ingredients}
+        data={filteredIngredients}
         renderItem={({ item: ingredient }) => (
           <Pressable
             style={styles.ingredientOption}
             onPress={() => {
-              console.log({ ingredient });
+              addIngredient(ingredient);
             }}
           >
             <View style={styles.ingredientImageContainer}>
