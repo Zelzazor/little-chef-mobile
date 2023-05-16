@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Pagination } from '../../ui/components/Pagination';
 import { UrlImage } from '../../ui/components/UrlImage';
 import { type PaginationMetadata } from '../../utility/types/response';
+import { useIngredientSearchContext } from '../context/IngredientSearchContext';
 import { type Ingredient } from '../types';
 
 export interface IngredientListProps {
@@ -11,33 +13,48 @@ export interface IngredientListProps {
   onPress: (ingredient: Ingredient) => void;
   prevPage: () => void;
   nextPage: () => void;
+  removable?: boolean;
 }
 
 export const IngredientList = ({
   data,
   pagination,
+  removable,
   onPress,
   prevPage,
   nextPage,
 }: IngredientListProps) => {
+  const { removeIngredient } = useIngredientSearchContext();
+
   return (
     <FlatList
       data={data}
       renderItem={({ item: ingredient }) => (
-        <Pressable
-          style={styles.ingredientOption}
-          onPress={() => {
-            onPress(ingredient);
-          }}
-        >
-          <View style={styles.ingredientImageContainer}>
-            <UrlImage
-              source={{ uri: ingredient.imageUrl }}
-              style={styles.ingredientImage}
-            />
-          </View>
-          <Text style={{ fontSize: 25 }}>{ingredient.name}</Text>
-        </Pressable>
+        <View>
+          <Pressable
+            style={styles.ingredientOption}
+            onPress={() => {
+              onPress(ingredient);
+            }}
+          >
+            <View style={styles.ingredientImageContainer}>
+              <UrlImage
+                source={{ uri: ingredient.imageUrl }}
+                style={styles.ingredientImage}
+              />
+            </View>
+            <Text style={{ fontSize: 25 }}>{ingredient.name}</Text>
+          </Pressable>
+          {removable && (
+            <Pressable
+              onPress={() => {
+                removeIngredient(ingredient.id);
+              }}
+            >
+              <Icon name={'trash-outline'} size={30} />
+            </Pressable>
+          )}
+        </View>
       )}
       keyExtractor={(ingredient: Ingredient) => ingredient.id}
       ListFooterComponent={() => (
