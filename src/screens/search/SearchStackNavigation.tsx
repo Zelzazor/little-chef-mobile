@@ -8,6 +8,7 @@ import { RecipeDetailsScreen } from './RecipeDetailsScreen';
 import { SearchIngredientScreen } from './SearchIngredientScreen';
 import { SearchRecipeScreen } from './SearchRecipeScreen';
 import { SearchScreen } from './SearchScreen';
+import { SearchIngredientResultsScreen } from './SearchingredientResultsScreen';
 import { SelectedIngredientsList } from './SelectedIngredientsList';
 import { SubmissionScreen } from './SubmissionScreen';
 
@@ -29,6 +30,10 @@ export const SearchStackNavigation = () => {
         <Stack.Screen
           name="IngredientList"
           component={SelectedIngredientsList}
+        />
+        <Stack.Screen
+          name="SearchIngredientResults"
+          component={SearchIngredientResultsScreen}
         />
         {loggedIn && <Stack.Screen name="Publish" component={PublishScreen} />}
         {loggedIn && (

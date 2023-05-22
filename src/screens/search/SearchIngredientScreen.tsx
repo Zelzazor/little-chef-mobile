@@ -69,7 +69,7 @@ export const SearchIngredientScreen = () => {
       />
       <IngredientSearchButton
         onPress={() => {
-          console.log('let him cook');
+          navigation.navigate('SearchIngredientResults');
         }}
       />
     </View>
