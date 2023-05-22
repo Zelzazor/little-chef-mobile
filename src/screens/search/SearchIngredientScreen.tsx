@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { config } from '../../config/app.config';
 import { IngredientList } from '../../features/search/components/IngredientList';
+import { IngredientSearchButton } from '../../features/search/components/IngredientSearchButton';
 import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
@@ -65,6 +66,11 @@ export const SearchIngredientScreen = () => {
         }}
         prevPage={prevPage}
         nextPage={nextPage}
+      />
+      <IngredientSearchButton
+        onPress={() => {
+          console.log('let him cook');
+        }}
       />
     </View>
   );
