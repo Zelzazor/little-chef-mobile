@@ -10,9 +10,9 @@ import { type Ingredient } from '../types';
 export interface IngredientListProps {
   data: Ingredient[];
   pagination?: PaginationMetadata;
-  onPress: (ingredient: Ingredient) => void;
-  prevPage: () => void;
-  nextPage: () => void;
+  onPress?: (ingredient: Ingredient) => void;
+  prevPage?: () => void;
+  nextPage?: () => void;
   removable?: boolean;
 }
 
@@ -34,7 +34,7 @@ export const IngredientList = ({
           <Pressable
             style={styles.ingredientOption}
             onPress={() => {
-              onPress(ingredient);
+              if (onPress) onPress(ingredient);
             }}
           >
             <View style={styles.ingredientImageContainer}>
@@ -58,11 +58,15 @@ export const IngredientList = ({
       )}
       keyExtractor={(ingredient: Ingredient) => ingredient.id}
       ListFooterComponent={() => (
-        <Pagination
-          pagination={pagination}
-          prevPage={prevPage}
-          nextPage={nextPage}
-        />
+        <>
+          {pagination && prevPage && nextPage && (
+            <Pagination
+              pagination={pagination}
+              prevPage={prevPage}
+              nextPage={nextPage}
+            />
+          )}
+        </>
       )}
     />
   );
