@@ -1,7 +1,6 @@
 import { Text } from '@rneui/base';
 import { type FC } from 'react';
-import { type ViewStyle } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, type ViewStyle } from 'react-native';
 
 export interface IngredientSearchButtonProps {
   onPress: () => void;
@@ -16,16 +15,19 @@ export const IngredientSearchButton: FC<IngredientSearchButtonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       style={{
-        // position: 'absolute',
-        bottom: 0,
-        height: 45,
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        height: 60,
+        width: 120,
         backgroundColor: '#CA3433',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 45,
         ...style,
       }}
     >
-      <Text style={{ color: '#FFFFFF' }}>Let's cook</Text>
+      <Text style={{ color: '#FFFFFF', fontSize: 18 }}>Let's cook</Text>
     </TouchableOpacity>
   );
 };
