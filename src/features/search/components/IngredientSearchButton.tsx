@@ -3,10 +3,14 @@ import { Text } from '@rneui/base';
 import { type FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
+import { useIngredientSearchContext } from '../context/IngredientSearchContext';
 
 export const IngredientSearchButton: FC = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
 
+  const { ingredients } = useIngredientSearchContext();
+
+  if (ingredients.length === 0) return <></>;
   return (
     <TouchableOpacity
       onPress={() => {
