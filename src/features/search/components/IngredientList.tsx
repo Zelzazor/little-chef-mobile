@@ -49,7 +49,7 @@ export const IngredientList = ({
             <Pressable
               style={{
                 width: 50,
-                height: '100%',
+                height: 100,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderBottomColor: '#CCC',
