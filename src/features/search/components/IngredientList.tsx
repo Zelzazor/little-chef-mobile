@@ -30,7 +30,7 @@ export const IngredientList = ({
     <FlatList
       data={data}
       renderItem={({ item: ingredient }) => (
-        <View>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
           <Pressable
             style={styles.ingredientOption}
             onPress={() => {
@@ -47,6 +47,14 @@ export const IngredientList = ({
           </Pressable>
           {removable && (
             <Pressable
+              style={{
+                width: 50,
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderBottomColor: '#CCC',
+                borderBottomWidth: 1,
+              }}
               onPress={() => {
                 removeIngredient(ingredient.id);
               }}
@@ -74,6 +82,7 @@ export const IngredientList = ({
 
 const styles = StyleSheet.create({
   ingredientOption: {
+    flexGrow: 1,
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderColor: '#CCCCCC',
