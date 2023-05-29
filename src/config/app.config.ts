@@ -1,4 +1,5 @@
 import { API_URL, AUTH0_AUDIENCE, AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '@env';
+
 export const config = {
   colors: {
     primary: '#CA3433',

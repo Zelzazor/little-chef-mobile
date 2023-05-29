@@ -1,30 +1,31 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text } from '@rneui/base';
 import { type FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { config } from '../../../config/app.config';
 import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
 
-export const IngredientSearchButton: FC = () => {
+export const SelectedIngredientsButton: FC = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
 
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('SearchIngredientResults');
+        navigation.navigate('IngredientList');
       }}
       style={{
         position: 'absolute',
-        bottom: 10,
-        right: 10,
-        height: 60,
-        width: 120,
-        backgroundColor: '#CA3433',
+        top: 15,
+        right: 15,
+        backgroundColor: config.colors.primary,
+        height: 55,
+        width: 55,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 45,
+        borderRadius: 50,
       }}
     >
-      <Text style={{ color: '#FFFFFF', fontSize: 18 }}>Let's cook</Text>
+      <Icon name="basket" size={40} color="white" />
     </TouchableOpacity>
   );
 };
