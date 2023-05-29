@@ -12,7 +12,7 @@ export const SearchIngredientResultsScreen = () => {
     isLoading,
     isError,
   } = useRecipes().useGetRecipes({
-    ingredients: ingredients.map((ingredient) => ingredient.name),
+    ingredients: ingredients.map((ingredient) => ingredient.id),
   });
 
   const [page, setPage] = useState(1);
