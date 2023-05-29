@@ -9,10 +9,18 @@ export interface IngredientListProps
 
 export const SelectedIngredientsList = () => {
   const { ingredients } = useIngredientSearchContext();
-
   return (
     <View>
-      <Text> Selected Ingredients</Text>
+      <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCC' }}>
+        <Text
+          style={{
+            padding: 10,
+            fontSize: 32,
+          }}
+        >
+          Selected Ingredients
+        </Text>
+      </View>
       <IngredientList data={ingredients} removable />
     </View>
   );
