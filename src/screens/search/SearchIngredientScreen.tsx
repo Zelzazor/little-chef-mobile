@@ -39,13 +39,14 @@ export const SearchIngredientScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{ borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
         <Text style={styles.pageTitle}>Select your ingredients</Text>
       </View>
       <SearchBar
         platform="android"
         placeholder="Search"
         style={styles.searchBar}
+        containerStyle={styles.searchBarContainer}
         onChangeText={(e) => {
           setSearch(e);
         }}
@@ -76,5 +77,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 
-  searchBar: { borderColor: '#ccc', borderBottomWidth: 1 },
+  searchBar: {
+    borderColor: '#ccc',
+    borderBottomWidth: 1,
+  },
+
+  searchBarContainer: {
+    backgroundColor: config.colors.background,
+  },
 });
