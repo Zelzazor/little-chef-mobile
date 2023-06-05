@@ -11,6 +11,7 @@ const actions = {
   DECREMENT: decrement,
   ADD_TO_LIST: addToList,
   REMOVE_FROM_LIST: removeFromList,
+  CLEAR_LIST: clearList,
 };
 
 function increment(state: typeof initialState) {
@@ -28,6 +29,12 @@ function addToList(state: typeof initialState, payload: Ingredient) {
 function removeFromList(state: typeof initialState, id: string) {
   return {
     ingredients: state.ingredients.filter((ingredient) => ingredient.id !== id),
+  };
+}
+
+function clearList(state: typeof initialState) {
+  return {
+    ingredients: [],
   };
 }
 

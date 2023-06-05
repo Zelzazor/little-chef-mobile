@@ -1,4 +1,5 @@
-import { type GetResponse } from '../../utility/types';
+import { type PaginatedRequest } from '../../utility/types/request';
+import { type GetPaginatedResponse } from '../../utility/types/response';
 
 export type GetRecipesRequestParams = {
   name?: string;
@@ -8,7 +9,7 @@ export type GetRecipesRequestParams = {
   tags?: string[];
 };
 
-export type GetRecipesResponse = GetResponse<Recipe>;
+export type GetRecipesResponse = GetPaginatedResponse<Recipe>;
 
 export type Recipe = {
   id: string;
@@ -33,6 +34,7 @@ export type RecipeTag = {
 };
 
 export type Ingredient = {
+  imageUrl: string | undefined;
   id: string;
   name: string;
   createdAt: Date;
@@ -46,3 +48,21 @@ export type Tag = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type SearchStackParamList = {
+  Search: undefined;
+  Recipe: undefined;
+  Ingredient: undefined;
+  RecipeDetails: { recipeId: string };
+  Publish: { recipeId: string };
+  Submissions: { recipeId?: string };
+  IngredientList: undefined;
+  SearchIngredientResults: undefined;
+};
+
+export type GetIngredientsRequest = PaginatedRequest & {
+  id?: string;
+  name?: string;
+};
+
+export type GetIngredientsResponse = GetPaginatedResponse<Ingredient>;

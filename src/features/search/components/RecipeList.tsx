@@ -1,17 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Pressable,
-  Text,
-} from 'react-native';
-import {
-  type GetRecipesResponse,
-  type Recipe,
-} from '../../../features/search/types';
-import { type SearchStackNavigationParams } from '../SearchStackNavigation';
-import { Pagination } from './Pagination';
+import { ActivityIndicator, FlatList, Pressable, Text } from 'react-native';
+import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
+import { Pagination } from '../../ui/components/Pagination';
+import { UrlImage } from '../../ui/components/UrlImage';
+import { type GetRecipesResponse, type Recipe } from '../types';
 
 interface RecipeListProps {
   data: GetRecipesResponse | undefined;
@@ -57,7 +49,7 @@ export const RecipeList = ({
             });
           }}
         >
-          <Image
+          <UrlImage
             source={{ uri: recipe.item.imageUrl }}
             style={{ width: '50%', aspectRatio: 1, borderRadius: 10 }}
           />
@@ -66,7 +58,11 @@ export const RecipeList = ({
       )}
       keyExtractor={(recipe: Recipe) => recipe.id}
       ListFooterComponent={() => (
-        <Pagination data={data} prevPage={prevPage} nextPage={nextPage} />
+        <Pagination
+          pagination={data?.pagination}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       )}
     />
   );

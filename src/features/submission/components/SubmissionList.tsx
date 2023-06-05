@@ -1,9 +1,6 @@
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
-import {
-  type GetSubmissionsResponse,
-  type Submission,
-} from '../../../features/submission/types';
-import { Pagination } from './Pagination';
+import { Pagination } from '../../ui/components/Pagination';
+import { type GetSubmissionsResponse, type Submission } from '../types';
 
 interface RecipeListProps {
   data: GetSubmissionsResponse | undefined;
@@ -53,7 +50,11 @@ export const SubmissionList = ({
       )}
       keyExtractor={(submission: Submission) => submission.id}
       ListFooterComponent={() => (
-        <Pagination data={data} prevPage={prevPage} nextPage={nextPage} />
+        <Pagination
+          pagination={data?.pagination}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       )}
     />
   );

@@ -1,9 +1,9 @@
 import { type StackScreenProps } from '@react-navigation/stack';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { type SearchStackParamList } from '../../features/search/types';
+import { SubmissionList } from '../../features/submission/components/SubmissionList';
 import { useSubmissions } from '../../features/submission/hooks/useSubmission';
-import { SubmissionList } from './components/SubmissionList';
-import { type SearchStackParamList } from './types';
 
 type SubmissionsScreenProps = StackScreenProps<
   SearchStackParamList,
