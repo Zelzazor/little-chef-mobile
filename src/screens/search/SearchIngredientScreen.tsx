@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/base';
 import { useMemo, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { config } from '../../config/app.config';
 import { IngredientList } from '../../features/search/components/IngredientList';
 import { IngredientSearchButton } from '../../features/search/components/IngredientSearchButton';
@@ -9,7 +9,7 @@ import { SelectedIngredientsButton } from '../../features/search/components/Sele
 import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
-import { BackButton } from '../../features/ui/components/BackButton';
+import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
@@ -44,24 +44,12 @@ export const SearchIngredientScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingLeft: 6,
-          borderBottomWidth: 1,
-          borderBottomColor: '#ccc',
-          backgroundColor: 'white',
+      <ScreenHeader
+        title="Select your ingredients"
+        onBack={() => {
+          navigation.goBack();
         }}
-      >
-        <BackButton
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
-        <Text style={styles.pageTitle}>Select your ingredients</Text>
-      </View>
+      />
       <SearchBar
         platform="android"
         placeholder="Search"
@@ -90,11 +78,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: config.colors.background,
-  },
-
-  pageTitle: {
-    padding: 10,
-    fontSize: 26,
   },
 
   searchBar: {
