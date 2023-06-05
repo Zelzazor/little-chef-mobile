@@ -20,14 +20,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 6,
+    paddingTop: 5,
+    paddingLeft: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     backgroundColor: 'white',
+    height: 65,
   },
 
   pageTitle: {
-    padding: 10,
-    fontSize: 26,
+    paddingLeft: 15,
+    fontSize: 24,
+    lineHeight: 26,
   },
 });
