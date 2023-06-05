@@ -40,6 +40,7 @@ export const SearchRecipeScreen = () => {
         style={{ borderColor: '#ccc', borderBottomWidth: 1 }}
         onChangeText={(e) => {
           setSearch(e);
+          setPage(1);
         }}
       />
       <RecipeList
