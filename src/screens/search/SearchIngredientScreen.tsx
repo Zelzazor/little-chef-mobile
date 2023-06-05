@@ -63,6 +63,8 @@ export const SearchIngredientScreen = () => {
         onPress={(ingredient: Ingredient) => {
           addIngredient(ingredient);
         }}
+        isLoading={isLoading}
+        isError={isError}
         prevPage={prevPage}
         nextPage={nextPage}
       />

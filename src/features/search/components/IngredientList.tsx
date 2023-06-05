@@ -1,4 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Pagination } from '../../ui/components/Pagination';
@@ -10,6 +16,8 @@ import { type Ingredient } from '../types';
 export interface IngredientListProps {
   data: Ingredient[];
   pagination?: PaginationMetadata;
+  isLoading?: boolean;
+  isError?: boolean;
   onPress?: (ingredient: Ingredient) => void;
   prevPage?: () => void;
   nextPage?: () => void;
@@ -20,11 +28,21 @@ export const IngredientList = ({
   data,
   pagination,
   removable,
+  isError,
+  isLoading,
   onPress,
   prevPage,
   nextPage,
 }: IngredientListProps) => {
   const { removeIngredient } = useIngredientSearchContext();
+
+  if (isError) {
+    return <Text>Error</Text>;
+  }
+
+  if (isLoading ?? !data) {
+    return <ActivityIndicator size={48} />;
+  }
 
   return (
     <FlatList
