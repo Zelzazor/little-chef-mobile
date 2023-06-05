@@ -1,10 +1,18 @@
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import { config } from '../../config/app.config';
+import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchScreen = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
+
+  const { ingredients, clearIngredients } = useIngredientSearchContext();
+
+  useFocusEffect(() => {
+    if (ingredients.length > 0) clearIngredients();
+  });
+
   return (
     <View style={styles.container}>
       <TouchableNativeFeedback

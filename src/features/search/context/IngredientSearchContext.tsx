@@ -8,6 +8,7 @@ interface IngredientSearchContextProps {
   ingredients: Ingredient[];
   addIngredient: (payload: Ingredient) => void;
   removeIngredient: (payload: string) => void;
+  clearIngredients: () => void;
 }
 
 const IngredientSearchContext = createContext<IngredientSearchContextProps>(
@@ -30,11 +31,18 @@ export const IngredientSearchProvider: FCC = ({ children }) => {
     });
   };
 
+  const clearIngredients = () => {
+    dispatch({
+      type: 'CLEAR_LIST',
+    });
+  };
+
   const payload: IngredientSearchContextProps = {
     count: state.count,
     ingredients: state.ingredients,
     addIngredient,
     removeIngredient,
+    clearIngredients,
   };
 
   return (
