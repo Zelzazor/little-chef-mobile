@@ -55,6 +55,7 @@ export const SearchIngredientScreen = () => {
         containerStyle={styles.searchBarContainer}
         onChangeText={(e) => {
           setSearch(e);
+          setPage(1);
         }}
       />
       <IngredientList
