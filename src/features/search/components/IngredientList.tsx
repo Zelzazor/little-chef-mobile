@@ -55,12 +55,14 @@ export const IngredientList = ({
               if (onPress) onPress(ingredient);
             }}
           >
-            <View style={styles.ingredientImageContainer}>
-              <UrlImage
-                source={{ uri: ingredient.imageUrl }}
-                style={styles.ingredientImage}
-              />
-            </View>
+            {ingredient.imageUrl && (
+              <View style={styles.ingredientImageContainer}>
+                <UrlImage
+                  source={{ uri: ingredient.imageUrl }}
+                  style={styles.ingredientImage}
+                />
+              </View>
+            )}
             <Text style={{ fontSize: 25 }}>{ingredient.name}</Text>
           </Pressable>
           {removable && (
