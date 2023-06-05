@@ -1,10 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { RecipeList } from '../../features/search/components/RecipeList';
 import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
+import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
+import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchIngredientResultsScreen = () => {
+  const navigation = useNavigation<SearchStackNavigationParams>();
+
   const { ingredients } = useIngredientSearchContext();
 
   const {
@@ -31,6 +36,7 @@ export const SearchIngredientResultsScreen = () => {
 
   return (
     <View>
+      <ScreenHeader title="Search results" onBack={navigation.goBack} />
       <RecipeList
         data={response?.data}
         isLoading={isLoading}
