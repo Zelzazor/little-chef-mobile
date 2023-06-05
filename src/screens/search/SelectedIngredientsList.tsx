@@ -18,12 +18,7 @@ export const SelectedIngredientsList = () => {
   return (
     <>
       <View>
-        <ScreenHeader
-          title="Selected ingredients"
-          onBack={() => {
-            navigation.goBack();
-          }}
-        />
+        <ScreenHeader title="Selected ingredients" onBack={navigation.goBack} />
         <IngredientList data={ingredients} removable />
       </View>
       <IngredientSearchButton />

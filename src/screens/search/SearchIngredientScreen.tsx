@@ -46,9 +46,7 @@ export const SearchIngredientScreen = () => {
     <View style={styles.container}>
       <ScreenHeader
         title="Select your ingredients"
-        onBack={() => {
-          navigation.goBack();
-        }}
+        onBack={navigation.goBack}
       />
       <SearchBar
         platform="android"
