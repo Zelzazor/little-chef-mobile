@@ -6,6 +6,7 @@ export const config = {
     secondary: '#F5F5F5',
     inactive: 'gray',
     background: '#F5FCFF',
+    border: '#CCCCCC',
   },
   auth0: {
     domain: AUTH0_DOMAIN,
