@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { type StackScreenProps } from '@react-navigation/stack';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { config } from '../../config/app.config';
 import { IngredientList } from '../../features/search/components/IngredientList';
 import { IngredientSearchButton } from '../../features/search/components/IngredientSearchButton';
 import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
@@ -17,7 +18,13 @@ export const SelectedIngredientsList = () => {
   const { ingredients } = useIngredientSearchContext();
   return (
     <>
-      <View>
+      <View
+        style={
+          ingredients?.length > 0
+            ? styles.containerWithFloatingButtons
+            : styles.container
+        }
+      >
         <ScreenHeader title="Selected ingredients" onBack={navigation.goBack} />
         <IngredientList data={ingredients} removable />
       </View>
@@ -25,3 +32,16 @@ export const SelectedIngredientsList = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: config.colors.background,
+  },
+
+  containerWithFloatingButtons: {
+    flex: 1,
+    backgroundColor: config.colors.background,
+    paddingBottom: 40,
+  },
+});
