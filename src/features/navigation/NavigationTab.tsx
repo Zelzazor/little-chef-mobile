@@ -4,6 +4,7 @@ import { type FC } from 'react';
 import { config } from '../../config/app.config';
 import { LoginScreen } from '../../screens/login/LoginScreen';
 import { ProfileScreen } from '../../screens/profile/ProfileScreen';
+import { ReviewScreen } from '../../screens/review/ReviewScreen';
 import { SearchStackNavigation } from '../../screens/search/SearchStackNavigation';
 import { useAuthContext } from '../auth/context/useAuthContext';
 import { SelectIcon } from './components/SelectIcon';
@@ -36,6 +37,7 @@ export const NavigationTab: FC = () => {
       })}
     >
       <Tab.Screen name="SearchIndex" component={SearchStackNavigation} />
+      {loggedIn && <Tab.Screen name="Review" component={ReviewScreen} />}
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
       {!loggedIn && <Tab.Screen name="Login" component={LoginScreen} />}
     </Tab.Navigator>
