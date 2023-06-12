@@ -43,7 +43,13 @@ export const SearchIngredientScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        ingredients.length > 0
+          ? styles.containerWithFloatingButtons
+          : styles.container
+      }
+    >
       <ScreenHeader
         title="Select your ingredients"
         onBack={navigation.goBack}
@@ -79,6 +85,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: config.colors.background,
+  },
+
+  containerWithFloatingButtons: {
+    flex: 1,
+    backgroundColor: config.colors.background,
+    paddingBottom: 40,
   },
 
   searchBar: {
