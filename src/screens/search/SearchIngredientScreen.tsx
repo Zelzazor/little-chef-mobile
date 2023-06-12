@@ -21,7 +21,7 @@ export const SearchIngredientScreen = () => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading, isError } = useGetIngredients({
-    pageSize: 6,
+    pageSize: 30,
     page,
     ...(debouncedSearch && { name: debouncedSearch }),
   });
