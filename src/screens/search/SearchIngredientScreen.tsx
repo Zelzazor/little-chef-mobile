@@ -45,7 +45,7 @@ export const SearchIngredientScreen = () => {
   return (
     <View
       style={
-        ingredients.length > 0
+        ingredients.length > 0 && data?.pagination.totalPages !== 1
           ? styles.containerWithFloatingButtons
           : styles.container
       }
