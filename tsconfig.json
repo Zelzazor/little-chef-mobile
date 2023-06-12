@@ -1,8 +1,8 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
-  "include": ["./.eslintrc.js", "**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  }
-
+  "include": [
+    "./**/*",
+    "./*",
+    ".eslintrc.js",
+  ]
 }

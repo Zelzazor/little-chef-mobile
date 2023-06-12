@@ -1,13 +1,11 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-
-
-export const RecipeScreen = () => {
+export const ReviewScreen = () => {
   const { params } = useRoute();
-  
-  const recipeName: string = "Ejemplo";
+
+  const recipeName: string = 'Ejemplo';
   const [votes, setVotes] = useState(5);
   const navigation = useNavigation();
 
@@ -19,20 +17,36 @@ export const RecipeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.recipeName}>{recipeName}</Text>
-      <Image source={{uri: 'https://via.placeholder.com/200'}} style={styles.postImage} />
-      <Image source={{uri: 'https://via.placeholder.com/200'}} style={styles.recipeImage} />
+      <Image
+        source={{ uri: 'https://via.placeholder.com/200' }}
+        style={styles.postImage}
+      />
+      <Image
+        source={{ uri: 'https://via.placeholder.com/200' }}
+        style={styles.recipeImage}
+      />
       <Text style={styles.voteCount}>{votes} votos disponibles</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.voteButton, styles.positiveButton]} onPress={() => handleVote('positive')}>
+        <TouchableOpacity
+          style={[styles.voteButton, styles.positiveButton]}
+          onPress={() => {
+            handleVote('positive');
+          }}
+        >
           <Text style={styles.buttonText}>Voto positivo</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.voteButton, styles.negativeButton]} onPress={() => handleVote('negative')}>
+        <TouchableOpacity
+          style={[styles.voteButton, styles.negativeButton]}
+          onPress={() => {
+            handleVote('negative');
+          }}
+        >
           <Text style={styles.buttonText}>Voto negativo</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

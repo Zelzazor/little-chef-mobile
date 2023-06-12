@@ -1,11 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { type NavigationProp } from '@react-navigation/native';
 import { type FC } from 'react';
-import { config } from '../../../../config/app.config';
-import { LoginScreen, ProfileScreen, RecipeScreen, SearchScreen } from '../../../../screens';
-import { PublishScreen } from '../../../../screens/publish/PublishScreen';
-import { useAuthContext } from '../../../auth';
+import { config } from '../../config/app.config';
+import { LoginScreen } from '../../screens/login/LoginScreen';
+import { ProfileScreen } from '../../screens/profile/ProfileScreen';
+import { ReviewScreen } from '../../screens/recipe_review/ReviewScreen';
+import { SearchStackNavigation } from '../../screens/search/SearchStackNavigation';
+import { useAuthContext } from '../auth/context/useAuthContext';
 import { SelectIcon } from './components/SelectIcon';
 import { type TabParamList } from './types';
+
+export type TabNavigationParams = NavigationProp<TabParamList>;
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -31,9 +36,8 @@ export const NavigationTab: FC = () => {
         tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen name="Search" component={SearchScreen} />
-      {loggedIn && <Tab.Screen name="RecipeReview" component={RecipeScreen} />}
-      {loggedIn && <Tab.Screen name="Publish" component={PublishScreen} />}
+      <Tab.Screen name="SearchIndex" component={SearchStackNavigation} />
+      <Tab.Screen name="Review" component={ReviewScreen} />
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
       {!loggedIn && <Tab.Screen name="Login" component={LoginScreen} />}
     </Tab.Navigator>

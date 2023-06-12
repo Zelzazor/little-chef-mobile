@@ -1,37 +1,49 @@
-import { Input } from '@rneui/base';
-import { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  StatusBar,
-  FlatList,
-} from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import { config } from '../../config/app.config';
+import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
+import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchScreen = () => {
-  const [search, setSearch] = useState<string>('');
-  const [list, setList] = useState<string[]>([]);
+  const navigation = useNavigation<SearchStackNavigationParams>();
+
+  const { ingredients, clearIngredients } = useIngredientSearchContext();
+
+  useFocusEffect(() => {
+    if (ingredients.length > 0) clearIngredients();
+  });
 
   return (
     <View style={styles.container}>
-      <Input
-        onChangeText={(value) => {
-          setSearch(value);
+      <TouchableNativeFeedback
+        onPress={() => {
+          navigation.navigate('Ingredient');
         }}
-        onSubmitEditing={() => {
-          setList((prev) => [...prev, search]);
+      >
+        <View style={styles.buttonIngredients}>
+          <Text style={styles.buttonTextIngredients}>
+            Search by{'\n'}
+            Ingredients
+          </Text>
+        </View>
+      </TouchableNativeFeedback>
+
+      <View style={styles.space}>
+        <Text style={styles.textSpace}>Or</Text>
+      </View>
+
+      <TouchableNativeFeedback
+        onPress={() => {
+          navigation.navigate('Recipe');
         }}
-        value={search}
-        leftIcon={{ type: 'ion-icons', name: 'search' }}
-      ></Input>
-      <FlatList
-        data={list}
-        renderItem={({ item }) => (
-          <Text style={{ paddingHorizontal: 15, fontSize: 50 }}>{item}</Text>
-        )}
-      />
+      >
+        <View style={styles.buttonRecipe}>
+          <Text style={styles.buttonTextRecipe}>
+            Search by{'\n'}
+            Recipes
+          </Text>
+        </View>
+      </TouchableNativeFeedback>
     </View>
   );
 };
@@ -40,7 +52,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: config.colors.background,
-    height: 1000,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  buttonIngredients: {
+    width: '100%',
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    flexGrow: 1,
+    opacity: 0.6,
+  },
+  buttonTextIngredients: {
+    textAlign: 'center',
+    color: '#69140E',
+    fontSize: 50,
+    fontWeight: 'bold',
+  },
+
+  buttonRecipe: {
+    width: '100%',
+    backgroundColor: '#2196F3',
+    justifyContent: 'center',
+    opacity: 0.5,
+    flexGrow: 1,
+  },
+
+  buttonTextRecipe: {
+    textAlign: 'center',
+    color: '#69140E',
+    fontSize: 50,
+    fontWeight: 'bold',
+  },
+
+  space: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  textSpace: {
+    fontSize: 20,
   },
 });

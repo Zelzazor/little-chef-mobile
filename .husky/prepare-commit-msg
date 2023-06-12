@@ -1,0 +1,18 @@
+#! /bin/sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+FILE=$1
+MESSAGE=$(cat $FILE)
+TICKET=$(git rev-parse --abbrev-ref HEAD | grep -Eo '^(\w+/)?(\w+[-_])?[0-9]+' | grep -Eo '(\w+[-])?[0-9]+' | tr "[:lower:]" "[:upper:]"):
+
+LOWER_MESSAGE=$(echo $MESSAGE | tr "[:upper:]" "[:lower:]")
+
+if [[ "$LOWER_MESSAGE" == $(echo "Merge" | tr "[:upper:]" "[:lower:]")* || $TICKET == ":" || "$MESSAGE" == "$TICKET"* ]];then
+  exit 0;
+fi
+
+if echo $MESSAGE | grep -q "$TICKET" ; then
+  exit 0;
+fi
+
+echo "$TICKET $MESSAGE" > $FILE

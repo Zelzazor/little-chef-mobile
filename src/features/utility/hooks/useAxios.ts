@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { useMemo } from 'react';
-import { useAuthContext } from '../../auth';
+import { useAuthContext } from '../../auth/context/useAuthContext';
 import { AXIOS_CONFIG } from '../config/axios-config';
 
 export const useAxios = () => {
