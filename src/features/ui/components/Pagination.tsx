@@ -13,6 +13,8 @@ export const Pagination = ({
   prevPage,
   nextPage,
 }: PaginationProps) => {
+  if (pagination?.totalPages === 1) return <></>;
+
   return pagination?.totalItems ? (
     <View
       style={{
