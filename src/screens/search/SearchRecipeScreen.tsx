@@ -1,9 +1,10 @@
 import { SearchBar } from '@rneui/themed';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { FilterButton } from '../../features/search/components/FilterButton';
 import { RecipeList } from '../../features/search/components/RecipeList';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
+import { Dropdown } from '../../features/ui/components/Dropdown';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 
@@ -58,7 +59,9 @@ export const SearchRecipeScreen = () => {
             }}
           />
         </View>
-        <FilterButton />
+        <Dropdown triggerElement={<FilterButton />}>
+          <Text>Filter</Text>
+        </Dropdown>
       </View>
       <RecipeList
         data={response?.data}
