@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RecipeList } from '../../features/search/components/RecipeList';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
+import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 
 export const SearchRecipeScreen = () => {
@@ -34,6 +35,7 @@ export const SearchRecipeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ScreenHeader title="Recipe Search" />
       <SearchBar
         platform="android"
         placeholder="Search"
