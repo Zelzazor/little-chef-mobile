@@ -1,6 +1,7 @@
 import { SearchBar } from '@rneui/themed';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { FilterButton } from '../../features/search/components/FilterButton';
 import { RecipeList } from '../../features/search/components/RecipeList';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
@@ -36,15 +37,29 @@ export const SearchRecipeScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenHeader title="Recipe Search" />
-      <SearchBar
-        platform="android"
-        placeholder="Search"
-        style={{ borderColor: '#ccc', borderBottomWidth: 1 }}
-        onChangeText={(e) => {
-          setSearch(e);
-          setPage(1);
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
-      />
+      >
+        <View style={{ flex: 1, width: '100%' }}>
+          <SearchBar
+            platform="android"
+            placeholder="Search"
+            style={{
+              borderColor: '#ccc',
+              borderBottomWidth: 1,
+            }}
+            onChangeText={(e) => {
+              setSearch(e);
+              setPage(1);
+            }}
+          />
+        </View>
+        <FilterButton />
+      </View>
       <RecipeList
         data={response?.data}
         isLoading={isLoading}
