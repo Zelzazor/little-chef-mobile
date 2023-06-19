@@ -1,12 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/themed';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { FilterButton } from '../../features/search/components/FilterButton';
+import { StyleSheet, View } from 'react-native';
 import { RecipeList } from '../../features/search/components/RecipeList';
+import { TagsFiltersDropdown } from '../../features/search/components/TagFiltersDropdown';
 import { useRecipeSearchFiltersContext } from '../../features/search/context/RecipeSearchFiltersContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
-import { Dropdown } from '../../features/ui/components/Dropdown';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
@@ -68,9 +67,7 @@ export const SearchRecipeScreen = () => {
             }}
           />
         </View>
-        <Dropdown triggerElement={<FilterButton />}>
-          <Text>Filter</Text>
-        </Dropdown>
+        <TagsFiltersDropdown />
       </View>
       <RecipeList
         data={response?.data}
