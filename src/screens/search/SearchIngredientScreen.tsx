@@ -6,7 +6,7 @@ import { config } from '../../config/app.config';
 import { IngredientList } from '../../features/search/components/IngredientList';
 import { IngredientSearchButton } from '../../features/search/components/IngredientSearchButton';
 import { SelectedIngredientsButton } from '../../features/search/components/SelectedIngredientsButton';
-import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
+import { useRecipeSearchFiltersContext } from '../../features/search/context/RecipeSearchFiltersContext';
 import { useIngredients } from '../../features/search/hooks/useIngredients';
 import { type Ingredient } from '../../features/search/types';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
@@ -25,7 +25,7 @@ export const SearchIngredientScreen = () => {
     page,
     ...(debouncedSearch && { name: debouncedSearch }),
   });
-  const { ingredients, addIngredient } = useIngredientSearchContext();
+  const { ingredients, addIngredient } = useRecipeSearchFiltersContext();
 
   const filteredIngredients = useMemo(() => {
     return data?.ingredients?.filter((ingredient) => {

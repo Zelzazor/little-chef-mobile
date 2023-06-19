@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FilterButton } from '../../features/search/components/FilterButton';
 import { RecipeList } from '../../features/search/components/RecipeList';
-import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
+import { useRecipeSearchFiltersContext } from '../../features/search/context/RecipeSearchFiltersContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { Dropdown } from '../../features/ui/components/Dropdown';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
@@ -19,7 +19,7 @@ export const SearchRecipeScreen = () => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
-  const { ingredients } = useIngredientSearchContext();
+  const { ingredients } = useRecipeSearchFiltersContext();
 
   const {
     data: response,

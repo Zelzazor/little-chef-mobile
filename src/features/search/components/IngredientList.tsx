@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Pagination } from '../../ui/components/Pagination';
 import { UrlImage } from '../../ui/components/UrlImage';
 import { type PaginationMetadata } from '../../utility/types/response';
-import { useIngredientSearchContext } from '../context/IngredientSearchContext';
+import { useRecipeSearchFiltersContext } from '../context/RecipeSearchFiltersContext';
 import { type Ingredient } from '../types';
 
 export interface IngredientListProps {
@@ -34,7 +34,7 @@ export const IngredientList = ({
   prevPage,
   nextPage,
 }: IngredientListProps) => {
-  const { removeIngredient } = useIngredientSearchContext();
+  const { removeIngredient } = useRecipeSearchFiltersContext();
 
   if (isError) {
     return <Text>Error</Text>;

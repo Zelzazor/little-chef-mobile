@@ -3,7 +3,7 @@ import { type FCC } from '../../../config';
 import { initialState, searchReducer } from '../reducer/searchReducer';
 import { type Ingredient, type Tag } from '../types';
 
-interface IngredientSearchContextProps {
+interface RecipeSearchFiltersContextProps {
   ingredients: Ingredient[];
   addIngredient: (payload: Ingredient) => void;
   removeIngredient: (payload: string) => void;
@@ -14,9 +14,10 @@ interface IngredientSearchContextProps {
   clearFilters: () => void;
 }
 
-const IngredientSearchContext = createContext<IngredientSearchContextProps>(
-  {} as IngredientSearchContextProps,
-);
+const RecipeSearchFiltersContext =
+  createContext<RecipeSearchFiltersContextProps>(
+    {} as RecipeSearchFiltersContextProps,
+  );
 
 export const IngredientSearchProvider: FCC = ({ children }) => {
   const [state, dispatch] = useReducer(searchReducer, initialState);
@@ -66,7 +67,7 @@ export const IngredientSearchProvider: FCC = ({ children }) => {
     });
   };
 
-  const payload: IngredientSearchContextProps = {
+  const payload: RecipeSearchFiltersContextProps = {
     ingredients: state.ingredients,
     addIngredient,
     removeIngredient,
@@ -78,11 +79,11 @@ export const IngredientSearchProvider: FCC = ({ children }) => {
   };
 
   return (
-    <IngredientSearchContext.Provider value={payload}>
+    <RecipeSearchFiltersContext.Provider value={payload}>
       {children}
-    </IngredientSearchContext.Provider>
+    </RecipeSearchFiltersContext.Provider>
   );
 };
 
-export const useIngredientSearchContext: () => IngredientSearchContextProps =
-  () => useContext(IngredientSearchContext);
+export const useRecipeSearchFiltersContext: () => RecipeSearchFiltersContextProps =
+  () => useContext(RecipeSearchFiltersContext);
