@@ -14,7 +14,7 @@ export const IngredientSearchButton: FC = () => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('SearchIngredientResults');
+        navigation.navigate('Recipe');
       }}
       style={{
         position: 'absolute',
