@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { SearchBar } from '@rneui/themed';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -7,8 +8,11 @@ import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { Dropdown } from '../../features/ui/components/Dropdown';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { useDebounce } from '../../features/utility/hooks/useDebounce';
+import { type SearchStackNavigationParams } from './SearchStackNavigation';
 
 export const SearchRecipeScreen = () => {
+  const navigation = useNavigation<SearchStackNavigationParams>();
+
   const recipeQueries = useRecipes();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -37,7 +41,7 @@ export const SearchRecipeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader title="Recipe Search" />
+      <ScreenHeader title="Recipe Search" onBack={navigation.goBack} />
       <View
         style={{
           display: 'flex',
