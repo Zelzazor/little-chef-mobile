@@ -5,6 +5,7 @@ import { type Ingredient, type Tag } from '../types';
 
 interface RecipeSearchFiltersContextProps {
   ingredients: Ingredient[];
+  tags: Tag[];
   addIngredient: (payload: Ingredient) => void;
   removeIngredient: (payload: string) => void;
   clearIngredients: () => void;
@@ -69,6 +70,7 @@ export const IngredientSearchProvider: FCC = ({ children }) => {
 
   const payload: RecipeSearchFiltersContextProps = {
     ingredients: state.ingredients,
+    tags: state.tags,
     addIngredient,
     removeIngredient,
     clearIngredients,
