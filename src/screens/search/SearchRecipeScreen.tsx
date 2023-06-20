@@ -18,7 +18,7 @@ export const SearchRecipeScreen = () => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
 
-  const { ingredients } = useRecipeSearchFiltersContext();
+  const { ingredients, tags } = useRecipeSearchFiltersContext();
 
   const {
     data: response,
@@ -26,6 +26,7 @@ export const SearchRecipeScreen = () => {
     isError,
   } = recipeQueries.useGetRecipes({
     ingredients: ingredients.map((ingredient) => ingredient.id),
+    tags: tags.map((tag) => tag.id),
     pageSize: 6,
     page,
     ...(debouncedSearch && { name: debouncedSearch }),
