@@ -1,14 +1,19 @@
 import { useEffect, useState, type ReactElement } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Popover } from 'react-native-popper';
+import { type IPopoverProps } from 'react-native-popper/lib/typescript/types';
 import { type FCC } from '../../../config';
 import { config } from '../../../config/app.config';
 
-export interface DropdownProps {
+export interface DropdownProps extends Partial<IPopoverProps> {
   triggerElement: ReactElement;
 }
 
-export const Dropdown: FCC<DropdownProps> = ({ children, triggerElement }) => {
+export const Dropdown: FCC<DropdownProps> = ({
+  children,
+  triggerElement,
+  ...popoverProps
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isShadowVisible, setIsShadowVisible] = useState(false);
 
@@ -28,6 +33,7 @@ export const Dropdown: FCC<DropdownProps> = ({ children, triggerElement }) => {
 
   return (
     <Popover
+      {...popoverProps}
       isOpen={isOpen}
       onOpenChange={setIsOpen}
       trigger={
@@ -35,9 +41,6 @@ export const Dropdown: FCC<DropdownProps> = ({ children, triggerElement }) => {
           <View>{triggerElement}</View>
         </Pressable>
       }
-      offset={-40}
-      crossOffset={-10}
-      placement="bottom left"
     >
       <Popover.Backdrop />
       <Popover.Content>

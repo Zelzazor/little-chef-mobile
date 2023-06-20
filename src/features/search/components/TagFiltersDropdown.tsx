@@ -5,7 +5,7 @@ import { TagFiltersDropdownCheckboxList } from './TagFiltersDropdownCheckboxList
 
 export const TagsFiltersDropdown: FC = () => {
   return (
-    <Dropdown triggerElement={<FilterButton />}>
+    <Dropdown triggerElement={<FilterButton />} offset={-40}>
       <TagFiltersDropdownCheckboxList />
     </Dropdown>
   );
