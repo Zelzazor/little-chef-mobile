@@ -1,6 +1,7 @@
 import { CheckBox } from '@rneui/base';
 import { type FC } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { config } from '../../../config/app.config';
 
 export type CheckboxListElement = {
   label: string;
@@ -33,17 +34,35 @@ export const CheckboxList: FC<CheckboxListProps> = ({
       data={data}
       renderItem={(element: { item: CheckboxListElement }) => {
         return (
-          <View>
+          <View style={styles.checkboxListElement}>
             <CheckBox
               checked={element.item.checked}
               onPress={() => {
                 handlePress(element.item);
               }}
+              containerStyle={styles.elementCheckbox}
             />
-            <Text>{element.item.label}</Text>
+            <Text style={styles.elementLabel}>{element.item.label}</Text>
           </View>
         );
       }}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  checkboxListElement: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  elementCheckbox: {
+    backgroundColor: config.colors.background,
+    padding: 0,
+  },
+
+  elementLabel: {
+    fontSize: 16,
+  },
+});

@@ -1,5 +1,5 @@
 import { useMemo, type FC } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import {
   CheckboxList,
   type CheckboxListElement,
@@ -79,13 +79,13 @@ export const TagFiltersDropdownCheckboxList: FC = () => {
 
   return (
     <View>
-      <Text>Difficulty</Text>
+      <Text style={styles.tagCategoryTitle}>Difficulty</Text>
       <CheckboxList
         data={difficultyTagsCheckboxListData}
         onSelect={handleSelection}
         onDeselect={handleDeselection}
       />
-      <Text>Others</Text>
+      <Text style={styles.tagCategoryTitle}>Others</Text>
       <CheckboxList
         data={otherTagsCheckboxListData}
         onSelect={handleSelection}
@@ -94,3 +94,11 @@ export const TagFiltersDropdownCheckboxList: FC = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  tagCategoryTitle: {
+    fontSize: 20,
+    paddingBottom: 5,
+    paddingLeft: 8,
+  },
+});
