@@ -78,3 +78,8 @@ export type GetTagsRequest = PaginatedRequest & {
 };
 
 export type GetTagsResponse = GetPaginatedResponse<Tag>;
+
+export enum TagTypes {
+  Difficulty = 'Difficulty',
+  Others = 'Others',
+}
