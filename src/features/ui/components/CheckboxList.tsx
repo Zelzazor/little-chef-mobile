@@ -33,7 +33,13 @@ export const CheckboxList: FC<CheckboxListProps> = ({
     <View>
       {data.map((element: CheckboxListElement) => {
         return (
-          <View style={styles.checkboxListElement} key={element.value}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress(element);
+            }}
+            style={styles.checkboxListElement}
+            key={element.value}
+          >
             <CheckBox
               checked={element.checked}
               onPress={() => {
@@ -41,14 +47,12 @@ export const CheckboxList: FC<CheckboxListProps> = ({
               }}
               containerStyle={styles.elementCheckbox}
             />
-            <TouchableOpacity
-              onPress={() => {
-                handlePress(element);
-              }}
-            >
-              <Text style={styles.elementLabel}>{element.label}</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={styles.elementLabelView}>
+              <Text style={styles.elementLabel} numberOfLines={1}>
+                {element.label}
+              </Text>
+            </View>
+          </TouchableOpacity>
         );
       })}
     </View>
@@ -69,5 +73,10 @@ const styles = StyleSheet.create({
 
   elementLabel: {
     fontSize: 16,
+    padding: 5,
+  },
+
+  elementLabelView: {
+    width: 100,
   },
 });
