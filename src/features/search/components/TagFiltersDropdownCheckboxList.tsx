@@ -83,12 +83,14 @@ export const TagFiltersDropdownCheckboxList: FC = () => {
       <Text style={styles.tagCategoryTitle}>Difficulty</Text>
       <CheckboxList
         data={difficultyTagsCheckboxListData}
+        isLoading={isLoading}
         onSelect={handleSelection}
         onDeselect={handleDeselection}
       />
       <Text style={styles.tagCategoryTitle}>Others</Text>
       <CheckboxList
         data={otherTagsCheckboxListData}
+        isLoading={isLoading}
         onSelect={handleSelection}
         onDeselect={handleDeselection}
       />

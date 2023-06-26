@@ -1,6 +1,12 @@
 import { CheckBox } from '@rneui/base';
 import { type FC } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { config } from '../../../config/app.config';
 
 export type CheckboxListElement = {
@@ -11,12 +17,14 @@ export type CheckboxListElement = {
 
 export interface CheckboxListProps {
   data: CheckboxListElement[];
+  isLoading: boolean;
   onSelect: (value: string) => void;
   onDeselect: (value: string) => void;
 }
 
 export const CheckboxList: FC<CheckboxListProps> = ({
   data,
+  isLoading,
   onSelect,
   onDeselect,
 }) => {
@@ -28,6 +36,10 @@ export const CheckboxList: FC<CheckboxListProps> = ({
 
     onSelect(element.value);
   };
+
+  if (isLoading || !data) {
+    return <ActivityIndicator size={24} />;
+  }
 
   return (
     <View>
