@@ -1,6 +1,6 @@
 import { CheckBox } from '@rneui/base';
 import { type FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { config } from '../../../config/app.config';
 
 export type CheckboxListElement = {
@@ -41,7 +41,13 @@ export const CheckboxList: FC<CheckboxListProps> = ({
               }}
               containerStyle={styles.elementCheckbox}
             />
-            <Text style={styles.elementLabel}>{element.label}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(element);
+              }}
+            >
+              <Text style={styles.elementLabel}>{element.label}</Text>
+            </TouchableOpacity>
           </View>
         );
       })}
