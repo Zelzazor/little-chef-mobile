@@ -40,15 +40,6 @@ export type Ingredient = {
   createdAt: Date;
   updatedAt: Date;
 };
-
-export type Tag = {
-  id: string;
-  name: string;
-  tagTypeId: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
 export type SearchStackParamList = {
   Search: undefined;
   Recipe: undefined;
@@ -66,3 +57,29 @@ export type GetIngredientsRequest = PaginatedRequest & {
 };
 
 export type GetIngredientsResponse = GetPaginatedResponse<Ingredient>;
+
+export type TagType = {
+  id: string;
+  name: string;
+};
+
+export type Tag = {
+  id: string;
+  name: string;
+  tagTypeId: string;
+  tagType: TagType;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type GetTagsRequest = PaginatedRequest & {
+  id?: string;
+  name?: string;
+};
+
+export type GetTagsResponse = GetPaginatedResponse<Tag>;
+
+export enum TagTypes {
+  Difficulty = 'Difficulty',
+  Others = 'Others',
+}

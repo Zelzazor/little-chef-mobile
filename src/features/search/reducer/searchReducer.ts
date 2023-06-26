@@ -1,40 +1,55 @@
-import { type Ingredient, type Recipe } from '../types';
+import { type Ingredient, type Recipe, type Tag } from '../types';
 
 export const initialState = {
-  count: 0,
   ingredients: [] as Ingredient[],
+  tags: [] as Tag[],
   recipes: [] as Recipe[],
 };
 
 const actions = {
-  INCREMENT: increment,
-  DECREMENT: decrement,
-  ADD_TO_LIST: addToList,
-  REMOVE_FROM_LIST: removeFromList,
-  CLEAR_LIST: clearList,
+  ADD_TO_INGREDIENT_LIST: addToIngredientList,
+  REMOVE_FROM_INGREDIENT_LIST: removeFromIngredientList,
+  CLEAR_INGREDIENT_LIST: clearIngredientList,
+  ADD_TO_TAG_LIST: addToTagList,
+  REMOVE_FROM_TAG_LIST: removeFromTagList,
+  CLEAR_TAG_LIST: clearTagList,
+  CLEAR_FILTERS: clearFilters,
 };
 
-function increment(state: typeof initialState) {
-  return { count: state.count + 1 };
-}
-
-function decrement(state: typeof initialState) {
-  return { count: state.count - 1 };
-}
-
-function addToList(state: typeof initialState, payload: Ingredient) {
+function addToIngredientList(state: typeof initialState, payload: Ingredient) {
   return { ingredients: state.ingredients.concat([payload]) };
 }
 
-function removeFromList(state: typeof initialState, id: string) {
+function removeFromIngredientList(state: typeof initialState, id: string) {
   return {
     ingredients: state.ingredients.filter((ingredient) => ingredient.id !== id),
   };
 }
 
-function clearList(state: typeof initialState) {
+function clearIngredientList(state: typeof initialState) {
   return {
     ingredients: [],
+  };
+}
+
+function addToTagList(state: typeof initialState, payload: Tag) {
+  return { tags: state.tags.concat([payload]) };
+}
+
+function removeFromTagList(state: typeof initialState, id: string) {
+  return { tags: state.tags.filter((tag) => tag.id !== id) };
+}
+
+function clearTagList(state: typeof initialState) {
+  return {
+    tags: [],
+  };
+}
+
+function clearFilters(state: typeof initialState) {
+  return {
+    ingredients: [],
+    tags: [],
   };
 }
 

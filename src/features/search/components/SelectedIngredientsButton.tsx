@@ -4,12 +4,12 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { config } from '../../../config/app.config';
 import { type SearchStackNavigationParams } from '../../../screens/search/SearchStackNavigation';
-import { useIngredientSearchContext } from '../context/IngredientSearchContext';
+import { useRecipeSearchFiltersContext } from '../context/RecipeSearchFiltersContext';
 
 export const SelectedIngredientsButton: FC = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
 
-  const { ingredients } = useIngredientSearchContext();
+  const { ingredients } = useRecipeSearchFiltersContext();
 
   if (ingredients.length === 0) return <></>;
 

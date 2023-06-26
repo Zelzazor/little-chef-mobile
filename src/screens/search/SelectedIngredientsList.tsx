@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { config } from '../../config/app.config';
 import { IngredientList } from '../../features/search/components/IngredientList';
 import { IngredientSearchButton } from '../../features/search/components/IngredientSearchButton';
-import { useIngredientSearchContext } from '../../features/search/context/IngredientSearchContext';
+import { useRecipeSearchFiltersContext } from '../../features/search/context/RecipeSearchFiltersContext';
 import { type SearchStackParamList } from '../../features/search/types';
 import { ScreenHeader } from '../../features/ui/components/ScreenHeader';
 import { type SearchStackNavigationParams } from './SearchStackNavigation';
@@ -15,7 +15,7 @@ export interface IngredientListProps
 export const SelectedIngredientsList = () => {
   const navigation = useNavigation<SearchStackNavigationParams>();
 
-  const { ingredients } = useIngredientSearchContext();
+  const { ingredients } = useRecipeSearchFiltersContext();
   return (
     <>
       <View
