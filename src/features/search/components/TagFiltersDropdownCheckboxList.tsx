@@ -1,5 +1,6 @@
 import { useMemo, type FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {
   CheckboxList,
   type CheckboxListElement,
@@ -78,7 +79,7 @@ export const TagFiltersDropdownCheckboxList: FC = () => {
   };
 
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Text style={styles.tagCategoryTitle}>Difficulty</Text>
       <CheckboxList
         data={difficultyTagsCheckboxListData}
@@ -91,11 +92,15 @@ export const TagFiltersDropdownCheckboxList: FC = () => {
         onSelect={handleSelection}
         onDeselect={handleDeselection}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    maxHeight: 300,
+  },
+
   tagCategoryTitle: {
     fontSize: 20,
     paddingBottom: 5,
