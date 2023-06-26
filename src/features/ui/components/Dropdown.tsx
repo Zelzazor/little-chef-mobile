@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactElement } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, type StyleProp } from 'react-native';
 import { Popover } from 'react-native-popper';
 import { type IPopoverProps } from 'react-native-popper/lib/typescript/types';
 import { type FCC } from '../../../config';
@@ -7,11 +7,13 @@ import { config } from '../../../config/app.config';
 
 export interface DropdownProps extends Partial<IPopoverProps> {
   triggerElement: ReactElement;
+  style: StyleProp<any>;
 }
 
 export const Dropdown: FCC<DropdownProps> = ({
   children,
   triggerElement,
+  style,
   ...popoverProps
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +50,7 @@ export const Dropdown: FCC<DropdownProps> = ({
           style={{
             ...styles.dropdownView,
             ...(isShadowVisible ? styles.dropdownShadow : {}),
+            ...style,
           }}
         >
           {children}
