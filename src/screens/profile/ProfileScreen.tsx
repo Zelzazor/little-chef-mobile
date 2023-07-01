@@ -1,26 +1,21 @@
 import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { Icon } from '@rneui/base';
+import { LinearProgress } from '@rneui/themed';
 import {
   ActivityIndicator,
   Button,
   Image,
   Platform,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
-  SafeAreaView,
   View,
-  ProgressBarAndroid,
-  ProgressViewIOS,
 } from 'react-native';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { type TabParamList } from '../../features/navigation/types';
 import { useUserContext } from '../../features/user/context/useUserContext';
-import { NavigationContainer } from '@react-navigation/native';
-import { useState } from 'react';
-import { Icon } from '@rneui/base';
-import { LinearProgress } from '@rneui/themed';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type ProfileScreenProps = BottomTabScreenProps<TabParamList, 'Profile'>;
 
@@ -52,6 +47,10 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     navigation.navigate('SearchIndex', { screen: 'Submissions' });
   };
 
+  const handleEditProfile = () => {
+    navigation.navigate('SearchIndex', { screen: 'EditProfile' });
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -74,7 +73,7 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
             name="edit"
             size={35}
             color="black"
-            onPress={handleMySubmissions}
+            onPress={handleEditProfile}
           />
         </View>
         <Text style={styles.heading}>My Profile</Text>
