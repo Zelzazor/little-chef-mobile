@@ -37,6 +37,10 @@ export const SelectIcon: FC<SelectIconProps> = ({
       active: 'receipt',
       inactive: 'receipt-outline',
     },
+    GuideStack: {
+      active: 'help-circle',
+      inactive: 'help-circle-outline',
+    },
   };
 
   const iconName = focused

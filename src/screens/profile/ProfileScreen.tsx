@@ -1,4 +1,5 @@
 import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { Button as StyledButton } from '@rneui/base';
 import {
   ActivityIndicator,
   Button,
@@ -9,6 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { type TabParamList } from '../../features/navigation/types';
@@ -27,11 +29,25 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
       </View>
     );
   }
-
   if (!loggedIn) {
     return (
       <View style={styles.container}>
-        <Text>You are not logged in</Text>
+        <StyledButton
+          size="lg"
+          color={config.colors.primary}
+          containerStyle={{
+            borderRadius: 50,
+            position: 'absolute',
+            top: 20,
+            right: 20,
+          }}
+        >
+          <Icon name="help-circle-outline" color="white" size={28} />
+        </StyledButton>
+        <View>
+          <Button onPress={onLogout} title="Log Out" />
+        </View>
+        <Text>You are not logged in...</Text>
         <Button onPress={onLogin} title="Log In" />
       </View>
     );

@@ -1,11 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import {
-  View,
-  Button,
-  Text,
-  StyleSheet,
   ActivityIndicator,
+  Button,
   Platform,
   StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
@@ -13,6 +14,7 @@ import { useAuthContext } from '../../features/auth/context/useAuthContext';
 export const LoginScreen = () => {
   const { isLoading, loggedIn, onLogin, onLogout, auth0User } =
     useAuthContext();
+  const navigation = useNavigation();
 
   if (isLoading) {
     return (
