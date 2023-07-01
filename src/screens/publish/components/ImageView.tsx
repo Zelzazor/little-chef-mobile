@@ -13,6 +13,7 @@ import { type FCC } from '../../../config';
 import { config } from '../../../config/app.config';
 import { type SearchStackParamList } from '../../../features/search/types';
 import { useSubmissions } from '../../../features/submission/hooks/useSubmission';
+import { useUserContext } from '../../../features/user/context/useUserContext';
 
 type Route = RouteProp<SearchStackParamList, 'Publish'>;
 type Navigation = NavigationProp<SearchStackParamList, 'Publish'>;
@@ -34,6 +35,8 @@ export const ImageView: FCC<ImageViewProps> = ({
 }) => {
   const { isLoading, mutate: publishSubmission } =
     useSubmissions().usePublishSubmission();
+
+  const { refetchUser } = useUserContext();
 
   if (isLoading)
     return (
@@ -97,6 +100,7 @@ export const ImageView: FCC<ImageViewProps> = ({
               },
               {
                 onSuccess: () => {
+                  refetchUser();
                   Alert.alert('Success', 'Your submission has been published!');
                   navigation.navigate('Search');
                 },

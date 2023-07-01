@@ -7,18 +7,30 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  SafeAreaView,
   View,
+  ProgressBarAndroid,
+  ProgressViewIOS,
 } from 'react-native';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { type TabParamList } from '../../features/navigation/types';
 import { useUserContext } from '../../features/user/context/useUserContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { useState } from 'react';
+import { Icon } from '@rneui/base';
+import { LinearProgress } from '@rneui/themed';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type ProfileScreenProps = BottomTabScreenProps<TabParamList, 'Profile'>;
 
 export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
   const { user } = useUserContext();
+
+  const progress =
+    user.experience.expInCurrentLevel /
+    (user.experience.expInCurrentLevel + user.experience.expToNextLevel);
 
   if (isLoading) {
     return (
@@ -27,7 +39,6 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
       </View>
     );
   }
-
   if (!loggedIn) {
     return (
       <View style={styles.container}>
@@ -37,31 +48,63 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     );
   }
 
+  const handleMySubmissions = () => {
+    navigation.navigate('SearchIndex', { screen: 'Submissions' });
+  };
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: user?.picture }} />
-      <Text style={styles.text}>Hello, {user?.name}!</Text>
-      <Button
-        color={config.colors.primary}
-        onPress={onLogout}
-        title="Log Out"
-      />
-      <View style={{ marginTop: 10 }}>
-        <Button
-          color={config.colors.primary}
-          onPress={() => {
-            navigation.navigate('SearchIndex', { screen: 'Submissions' });
-          }}
-          title="My submissions"
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.iconsContainer}>
+          <Icon
+            name="logout"
+            size={35}
+            color="black"
+            onPress={onLogout}
+            style={{ marginBottom: 20 }}
+          />
+          <Icon
+            name="topic"
+            size={35}
+            color="black"
+            onPress={handleMySubmissions}
+            style={{ marginBottom: 20 }}
+          />
+          <Icon
+            name="edit"
+            size={35}
+            color="black"
+            onPress={handleMySubmissions}
+          />
+        </View>
+        <Text style={styles.heading}>My Profile</Text>
+        <Image style={styles.image} source={{ uri: user?.picture }} />
+        <Text style={styles.text}>Hello, {user?.name}!</Text>
+        <Text style={styles.textLevel}>Nivel {user.experience.level}</Text>
+        <LinearProgress
+          variant="determinate"
+          value={progress}
+          style={{ width: '80%' }}
         />
+        <View style={styles.buttonContainer}>{}</View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
+    backgroundColor: config.colors.background,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  heading: {
+    fontSize: 32,
+    fontWeight: '800',
+    marginBottom: 50,
+    marginTop: 150,
+  },
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: config.colors.background,
@@ -76,5 +119,18 @@ const styles = StyleSheet.create({
   text: {
     margin: 20,
     fontSize: 20,
+  },
+  textLevel: {
+    fontSize: 15,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    marginBottom: 20,
+  },
+  iconsContainer: {
+    flexDirection: 'column',
+    position: 'absolute',
+    top: 10,
+    right: 20,
   },
 });
