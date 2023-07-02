@@ -16,6 +16,7 @@ import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { type SearchStackParamList } from '../../features/search/types';
 import { Tag } from '../../features/ui/components/Tag';
+import { useUserContext } from '../../features/user/context/useUserContext';
 
 type RecipeDetailsScreenProps = StackScreenProps<
   SearchStackParamList,
@@ -28,6 +29,7 @@ export const RecipeDetailsScreen = ({
 }: RecipeDetailsScreenProps) => {
   const recipeQueries = useRecipes();
   const { loggedIn } = useAuthContext();
+  const { user } = useUserContext();
   const {
     data: response,
     isLoading,
@@ -110,7 +112,7 @@ export const RecipeDetailsScreen = ({
         <Text style={{ fontSize: 24 }}>Instructions</Text>
         <Markdown>{unescapeLineBreaks(response.data.recipeSteps)}</Markdown>
 
-        {loggedIn && (
+        {loggedIn && !user?.bannedAt && (
           <Button
             buttonStyle={{
               backgroundColor: config.colors.primary,
