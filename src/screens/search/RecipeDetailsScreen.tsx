@@ -15,6 +15,7 @@ import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { useRecipes } from '../../features/search/hooks/useRecipes';
 import { type SearchStackParamList } from '../../features/search/types';
+import { Tag } from '../../features/ui/components/Tag';
 
 type RecipeDetailsScreenProps = StackScreenProps<
   SearchStackParamList,
@@ -51,7 +52,6 @@ export const RecipeDetailsScreen = ({
         <ActivityIndicator size={48} color="red" />
       </View>
     );
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View
@@ -85,6 +85,12 @@ export const RecipeDetailsScreen = ({
         source={{ uri: response.data.imageUrl }}
         style={{ width: '80%', aspectRatio: 1, borderRadius: 10 }}
       />
+      <View style={styles.tagList}>
+        {(response.data.tags?.length ?? 0) > 0 &&
+          response.data.tags?.map((tagEntry) => {
+            return <Tag key={tagEntry.tag.id} title={tagEntry.tag.name} />;
+          })}
+      </View>
       <View style={{ display: 'flex', width: '80%', marginBottom: 20 }}>
         <Text style={{ fontSize: 28, fontWeight: 'bold' }}>
           {response.data.name}
@@ -139,5 +145,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+
+  tagList: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 5,
+    maxWidth: '100%',
+    flexWrap: 'wrap',
+    paddingHorizontal: 40,
   },
 });
