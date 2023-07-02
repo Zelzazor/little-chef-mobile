@@ -11,6 +11,7 @@ export type RegisteredUser = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+  bannedAt: Date | null;
 };
 
 export type User = Omit<Auth0User<null>, 'userId'> & RegisteredUser;
