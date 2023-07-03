@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useAxios } from '../../utility/hooks/useAxios';
 import { type GetUserResponse } from '../types/get-user';
 
@@ -15,10 +15,28 @@ export const useUser = () => {
       { enabled: false },
     );
 
+  const useUpdateUser = () => {
+    return useMutation({
+      mutationFn: async ({
+        name,
+        nickName,
+      }: {
+        name: string;
+        nickName: string;
+      }) => {
+        const data = {
+          name,
+          nickName,
+        };
+        return await axios.post(URL, data);
+      },
+    });
+  };
+
   const useTest = () =>
     useQuery('test', async () => {
       return await axios.get<GetUserResponse>(`${URL}/auth`);
     });
 
-  return { useGetUser, useTest };
+  return { useGetUser, useTest, useUpdateUser };
 };

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { IngredientSearchProvider } from '../../features/search/context/RecipeSearchFiltersContext';
 import { type SearchStackParamList } from '../../features/search/types';
+import { EditProfileScreen } from '../profile/EditProfileScreen';
 import { PublishScreen } from '../publish/PublishScreen';
 import { RecipeDetailsScreen } from './RecipeDetailsScreen';
 import { SearchIngredientScreen } from './SearchIngredientScreen';
@@ -33,6 +34,9 @@ export const SearchStackNavigation = () => {
         {loggedIn && <Stack.Screen name="Publish" component={PublishScreen} />}
         {loggedIn && (
           <Stack.Screen name="Submissions" component={SubmissionScreen} />
+        )}
+        {loggedIn && (
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         )}
       </Stack.Navigator>
     </IngredientSearchProvider>

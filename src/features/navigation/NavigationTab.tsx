@@ -8,6 +8,7 @@ import { ProfileScreen } from '../../screens/profile/ProfileScreen';
 import { ReviewScreen } from '../../screens/review/ReviewScreen';
 import { SearchStackNavigation } from '../../screens/search/SearchStackNavigation';
 import { useAuthContext } from '../auth/context/useAuthContext';
+import { useUserContext } from '../user/context/useUserContext';
 import { SelectIcon } from './components/SelectIcon';
 import { type TabParamList } from './types';
 
@@ -17,6 +18,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 export const NavigationTab: FC = () => {
   const { loggedIn } = useAuthContext();
+  const { user } = useUserContext();
 
   return (
     <Tab.Navigator
@@ -38,7 +40,9 @@ export const NavigationTab: FC = () => {
       })}
     >
       <Tab.Screen name="SearchIndex" component={SearchStackNavigation} />
-      {loggedIn && <Tab.Screen name="Review" component={ReviewScreen} />}
+      {loggedIn && !user?.bannedAt && (
+        <Tab.Screen name="Review" component={ReviewScreen} />
+      )}
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
       {!loggedIn && <Tab.Screen name="Login" component={LoginScreen} />}
       <Tab.Screen name="GuideStack" component={GuideStackNavigation} />

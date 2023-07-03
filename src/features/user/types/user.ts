@@ -7,10 +7,18 @@ export type RegisteredUser = {
   nickName: string | null;
   email: string;
   birthDate: Date | null;
+  experience: Experience;
   roleId: string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+  bannedAt: Date | null;
+};
+
+type Experience = {
+  level: number;
+  expInCurrentLevel: number;
+  expToNextLevel: number;
 };
 
 export type User = Omit<Auth0User<null>, 'userId'> & RegisteredUser;
