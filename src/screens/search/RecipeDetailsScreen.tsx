@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 5,
+    width: '100%',
+    justifyContent: 'flex-start',
     maxWidth: '100%',
     flexWrap: 'wrap',
     paddingHorizontal: 40,
