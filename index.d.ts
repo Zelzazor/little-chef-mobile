@@ -16,3 +16,8 @@ declare module 'react-native-easy-markdown' {
     render(): JSX.Element;
   }
 }
+
+declare module '*.png';
+declare module '*.svg';
+declare module '*.jpeg';
+declare module '*.jpg';
