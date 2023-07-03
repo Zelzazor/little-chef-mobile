@@ -10,6 +10,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { config } from '../../config/app.config';
@@ -62,19 +63,6 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
             onPress={onLogout}
             style={{ marginBottom: 20 }}
           />
-          <Icon
-            name="topic"
-            size={35}
-            color="black"
-            onPress={handleMySubmissions}
-            style={{ marginBottom: 20 }}
-          />
-          <Icon
-            name="edit"
-            size={35}
-            color="black"
-            onPress={handleEditProfile}
-          />
         </View>
         <Text style={styles.heading}>My Profile</Text>
         <Image style={styles.image} source={{ uri: user?.picture }} />
@@ -83,9 +71,36 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
         <LinearProgress
           variant="determinate"
           value={progress}
-          style={{ width: '80%' }}
+          style={styles.progressBar}
+          trackColor="#8D99AE"
+          color="#CA3433"
         />
-        <View style={styles.buttonContainer}>{}</View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonSubmissions}
+            onPress={handleMySubmissions}
+          >
+            <Icon
+              name="file-copy"
+              size={20}
+              color="white"
+              style={styles.buttonIcon}
+            />
+            <Text style={styles.buttonText}>My Submissions</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonEdit}
+            onPress={handleEditProfile}
+          >
+            <Icon
+              name="edit"
+              size={20}
+              color="white"
+              style={styles.buttonIcon}
+            />
+            <Text style={styles.buttonText}>Edit my profile</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -101,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '800',
     marginBottom: 50,
-    marginTop: 150,
+    marginTop: 80,
   },
   container: {
     justifyContent: 'center',
@@ -123,13 +138,51 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 10,
   },
-  buttonContainer: {
-    marginBottom: 20,
-  },
+
   iconsContainer: {
     flexDirection: 'column',
     position: 'absolute',
     top: 10,
     right: 20,
+  },
+  progressBar: {
+    width: '80%',
+    height: 15,
+    borderRadius: 10,
+  },
+  buttonSubmissions: {
+    backgroundColor: '#3C1518',
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    borderRadius: 10,
+    marginTop: 20,
+    marginRight: 20,
+    marginLeft: 20,
+    flexDirection: 'row',
+  },
+  buttonEdit: {
+    backgroundColor: '#69140E',
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    borderRadius: 10,
+    marginTop: 20,
+    marginRight: 20,
+    marginLeft: 20,
+    flexDirection: 'row',
+  },
+
+  buttonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+  },
+  buttonIcon: {
+    marginRight: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 50,
   },
 });
