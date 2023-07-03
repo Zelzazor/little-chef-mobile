@@ -10,7 +10,7 @@ export const EditProfileScreen = () => {
   const { useUpdateUser } = useUser();
   const { mutate: updateUser } = useUpdateUser();
   const [isLoading, setIsLoading] = useState(false);
-  const [nickName, setNickName] = useState(user.nickname);
+  const [nickName, setNickName] = useState(user.nickName ?? '');
   const [fullName, setFullName] = useState(user.name);
   const handleSave = () => {
     setIsLoading(true);
