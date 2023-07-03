@@ -2,10 +2,21 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { type FCC } from '../../../config';
 import { useAuthContext } from '../../auth/context/useAuthContext';
 import { useUser } from '../hooks/useUser';
-import { type User } from '../types/user';
+import { type RegisteredUser, type User } from '../types/user';
+import {
+  type QueryObserverResult,
+  type RefetchOptions,
+  type RefetchQueryFilters,
+} from 'react-query';
+import { type AxiosResponse } from 'axios';
 
 interface UserContextProps {
   user: User;
+  refetchUser: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined,
+  ) => Promise<
+    QueryObserverResult<AxiosResponse<RegisteredUser, any>, unknown>
+  >;
 }
 
 const UserContext = createContext<UserContextProps>({} as UserContextProps);
@@ -26,8 +37,8 @@ export const UserProvider: FCC = ({ children }) => {
   }, [auth0User, registeredUser]);
 
   const payload: UserContextProps = useMemo(() => {
-    return { user };
-  }, [user]);
+    return { user, refetchUser };
+  }, [user, refetchUser]);
 
   return (
     <UserContext.Provider value={payload}>{children}</UserContext.Provider>
