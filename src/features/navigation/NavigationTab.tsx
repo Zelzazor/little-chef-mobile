@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NavigationProp } from '@react-navigation/native';
 import { type FC } from 'react';
 import { config } from '../../config/app.config';
+import { GuideStackNavigation } from '../../screens/guide/GuideStackNavigation';
 import { LoginScreen } from '../../screens/login/LoginScreen';
 import { ProfileScreen } from '../../screens/profile/ProfileScreen';
 import { ReviewScreen } from '../../screens/review/ReviewScreen';
@@ -44,6 +45,7 @@ export const NavigationTab: FC = () => {
       )}
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
       {!loggedIn && <Tab.Screen name="Login" component={LoginScreen} />}
+      <Tab.Screen name="GuideStack" component={GuideStackNavigation} />
     </Tab.Navigator>
   );
 };

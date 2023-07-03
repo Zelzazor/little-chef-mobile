@@ -1,5 +1,5 @@
 import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Icon } from '@rneui/base';
+import { Icon as RNEUIcon, Button as StyledButton } from '@rneui/base';
 import { LinearProgress } from '@rneui/themed';
 import {
   ActivityIndicator,
@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { config } from '../../config/app.config';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { type TabParamList } from '../../features/navigation/types';
@@ -38,7 +39,22 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   if (!loggedIn) {
     return (
       <View style={styles.container}>
-        <Text>You are not logged in</Text>
+        <StyledButton
+          size="lg"
+          color={config.colors.primary}
+          containerStyle={{
+            borderRadius: 50,
+            position: 'absolute',
+            top: 20,
+            right: 20,
+          }}
+        >
+          <Icon name="help-circle-outline" color="white" size={28} />
+        </StyledButton>
+        <View>
+          <Button onPress={onLogout} title="Log Out" />
+        </View>
+        <Text>You are not logged in...</Text>
         <Button onPress={onLogin} title="Log In" />
       </View>
     );
@@ -56,7 +72,7 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.iconsContainer}>
-          <Icon
+          <RNEUIcon
             name="logout"
             size={35}
             color="black"
@@ -80,7 +96,7 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
             style={styles.buttonSubmissions}
             onPress={handleMySubmissions}
           >
-            <Icon
+            <RNEUIcon
               name="file-copy"
               size={20}
               color="white"
@@ -92,7 +108,7 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
             style={styles.buttonEdit}
             onPress={handleEditProfile}
           >
-            <Icon
+            <RNEUIcon
               name="edit"
               size={20}
               color="white"
