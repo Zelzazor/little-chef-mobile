@@ -1,5 +1,7 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { type StackScreenProps } from '@react-navigation/stack';
 import { Button, Image, Text } from '@rneui/base';
+import { useCallback } from 'react';
 import {
   ActivityIndicator,
   Platform,
@@ -29,13 +31,19 @@ export const RecipeDetailsScreen = ({
 }: RecipeDetailsScreenProps) => {
   const recipeQueries = useRecipes();
   const { loggedIn } = useAuthContext();
-  const { user } = useUserContext();
+  const { user, refetchUser } = useUserContext();
   const {
     data: response,
     isLoading,
     isFetching,
     isError,
   } = recipeQueries.useGetSingleRecipe(route.params.recipeId);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchUser();
+    }, [refetchUser]),
+  );
 
   function unescapeLineBreaks(string: string) {
     return string.replace(/\\n/g, '\n');
@@ -112,7 +120,7 @@ export const RecipeDetailsScreen = ({
         <Text style={{ fontSize: 24 }}>Instructions</Text>
         <Markdown>{unescapeLineBreaks(response.data.recipeSteps)}</Markdown>
 
-        {loggedIn && !user?.bannedAt && (
+        {loggedIn && user?.bannedAt === null && (
           <Button
             buttonStyle={{
               backgroundColor: config.colors.primary,
@@ -120,6 +128,7 @@ export const RecipeDetailsScreen = ({
               marginTop: 20,
             }}
             onPress={() => {
+              refetchUser();
               navigation.navigate('Publish', {
                 recipeId: response.data.id,
               });

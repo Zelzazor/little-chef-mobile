@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthContext } from '../../features/auth/context/useAuthContext';
 import { IngredientSearchProvider } from '../../features/search/context/RecipeSearchFiltersContext';
 import { type SearchStackParamList } from '../../features/search/types';
+import { useUserContext } from '../../features/user/context/useUserContext';
 import { EditProfileScreen } from '../profile/EditProfileScreen';
 import { PublishScreen } from '../publish/PublishScreen';
 import { RecipeDetailsScreen } from './RecipeDetailsScreen';
@@ -17,6 +18,7 @@ export type SearchStackNavigationParams = NavigationProp<SearchStackParamList>;
 const Stack = createStackNavigator<SearchStackParamList>();
 export const SearchStackNavigation = () => {
   const { loggedIn } = useAuthContext();
+  const { user } = useUserContext();
   return (
     <IngredientSearchProvider>
       <Stack.Navigator
@@ -31,7 +33,9 @@ export const SearchStackNavigation = () => {
           name="IngredientList"
           component={SelectedIngredientsList}
         />
-        {loggedIn && <Stack.Screen name="Publish" component={PublishScreen} />}
+        {loggedIn && user.bannedAt === null && (
+          <Stack.Screen name="Publish" component={PublishScreen} />
+        )}
         {loggedIn && (
           <Stack.Screen name="Submissions" component={SubmissionScreen} />
         )}

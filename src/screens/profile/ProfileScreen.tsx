@@ -1,6 +1,8 @@
 import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
 import { Icon as RNEUIcon, Button as StyledButton } from '@rneui/base';
 import { LinearProgress } from '@rneui/themed';
+import { useCallback } from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -23,11 +25,18 @@ type ProfileScreenProps = BottomTabScreenProps<TabParamList, 'Profile'>;
 
 export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { isLoading, loggedIn, onLogin, onLogout } = useAuthContext();
-  const { user } = useUserContext();
+  const { user, refetchUser } = useUserContext();
 
-  const progress =
-    user.experience.expInCurrentLevel /
-    (user.experience.expInCurrentLevel + user.experience.expToNextLevel);
+  useFocusEffect(
+    useCallback(() => {
+      refetchUser();
+    }, [refetchUser]),
+  );
+
+  const progress = user.experience
+    ? user.experience.expInCurrentLevel /
+      (user.experience.expInCurrentLevel + user.experience.expToNextLevel)
+    : 0;
 
   if (isLoading) {
     return (
@@ -82,8 +91,11 @@ export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
         </View>
         <Text style={styles.heading}>My Profile</Text>
         <Image style={styles.image} source={{ uri: user?.picture }} />
+        {user.bannedAt && <Text style={styles.textBanned}>You are banned</Text>}
         <Text style={styles.text}>Hello, {user?.name}!</Text>
-        <Text style={styles.textLevel}>Nivel {user.experience.level}</Text>
+        <Text style={styles.textLevel}>
+          Nivel {user.experience ? user.experience.level : 0}
+        </Text>
         <LinearProgress
           variant="determinate"
           value={progress}
@@ -149,6 +161,12 @@ const styles = StyleSheet.create({
   text: {
     margin: 20,
     fontSize: 20,
+  },
+  textBanned: {
+    margin: 20,
+    fontSize: 20,
+    color: 'red',
+    fontWeight: 'bold',
   },
   textLevel: {
     fontSize: 15,
