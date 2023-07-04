@@ -5,11 +5,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useQueryClient } from 'react-query';
 import { config } from '../../config/app.config';
 import { useVotes } from '../../features/votes/hooks/useVotes';
+import { useUserContext } from '../../features/user/context/useUserContext';
 
 export const ReviewScreen = () => {
   const { useGetRandomSubmission, useSubmitVote } = useVotes();
   const queryClient = useQueryClient();
   const [isEnabled, setIsEnabled] = useState(true);
+  const { refetchUser } = useUserContext();
   const {
     data: submission,
     isLoading,
@@ -17,6 +19,12 @@ export const ReviewScreen = () => {
     isError,
   } = useGetRandomSubmission();
   const { mutate: submitVote } = useSubmitVote();
+
+  const onVoteSuccess = () => {
+    queryClient.invalidateQueries('vote');
+    setIsEnabled(true);
+    refetchUser();
+  };
 
   if (isError)
     return (
@@ -74,10 +82,7 @@ export const ReviewScreen = () => {
             submitVote(
               { submissionId: submission.id, isUpvote: true },
               {
-                onSuccess: () => {
-                  queryClient.invalidateQueries('vote');
-                  setIsEnabled(true);
-                },
+                onSuccess: onVoteSuccess,
               },
             );
           }}
@@ -96,10 +101,7 @@ export const ReviewScreen = () => {
             submitVote(
               { submissionId: submission.id, isUpvote: false },
               {
-                onSuccess: () => {
-                  queryClient.invalidateQueries('vote');
-                  setIsEnabled(true);
-                },
+                onSuccess: onVoteSuccess,
               },
             );
           }}
