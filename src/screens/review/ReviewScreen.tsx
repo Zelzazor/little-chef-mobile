@@ -1,17 +1,18 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { Button } from '@rneui/base';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useQueryClient } from 'react-query';
 import { config } from '../../config/app.config';
-import { useVotes } from '../../features/votes/hooks/useVotes';
 import { useUserContext } from '../../features/user/context/useUserContext';
+import { useVotes } from '../../features/votes/hooks/useVotes';
 
 export const ReviewScreen = () => {
   const { useGetRandomSubmission, useSubmitVote } = useVotes();
+  const { refetchUser } = useUserContext();
   const queryClient = useQueryClient();
   const [isEnabled, setIsEnabled] = useState(true);
-  const { refetchUser } = useUserContext();
   const {
     data: submission,
     isLoading,
@@ -25,6 +26,12 @@ export const ReviewScreen = () => {
     setIsEnabled(true);
     refetchUser();
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      refetchUser();
+    }, [refetchUser]),
+  );
 
   if (isError)
     return (
@@ -79,12 +86,15 @@ export const ReviewScreen = () => {
           }}
           onPress={() => {
             setIsEnabled(false);
-            submitVote(
-              { submissionId: submission.id, isUpvote: true },
-              {
-                onSuccess: onVoteSuccess,
-              },
-            );
+            refetchUser().then((userResult) => {
+              if (userResult.data?.data.bannedAt) return;
+              submitVote(
+                { submissionId: submission.id, isUpvote: true },
+                {
+                  onSuccess: onVoteSuccess,
+                },
+              );
+            });
           }}
         >
           <Icon name="checkmark-outline" color="white" size={30} />
@@ -98,12 +108,15 @@ export const ReviewScreen = () => {
           }}
           onPress={() => {
             setIsEnabled(false);
-            submitVote(
-              { submissionId: submission.id, isUpvote: false },
-              {
-                onSuccess: onVoteSuccess,
-              },
-            );
+            refetchUser().then((userResult) => {
+              if (userResult.data?.data.bannedAt) return;
+              submitVote(
+                { submissionId: submission.id, isUpvote: false },
+                {
+                  onSuccess: onVoteSuccess,
+                },
+              );
+            });
           }}
         >
           <Icon name="close-outline" color="white" size={30} />

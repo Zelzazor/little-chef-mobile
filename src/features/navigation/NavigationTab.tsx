@@ -40,7 +40,7 @@ export const NavigationTab: FC = () => {
       })}
     >
       <Tab.Screen name="SearchIndex" component={SearchStackNavigation} />
-      {loggedIn && !user?.bannedAt && (
+      {loggedIn && user?.bannedAt === null && (
         <Tab.Screen name="Review" component={ReviewScreen} />
       )}
       {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
